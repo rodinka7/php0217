@@ -1,4 +1,85 @@
 <?php
+/* TASK 1 */
+$name = 'Tania';
+$age = '29';
+
+echo "My name is $name <br />";
+echo "I'm $age years old <br />";
+echo "\"!|\/'\"\ <hr>";
+/* TASK 1 */
+
+/* TASK 2 */
+$pictures = 80;
+$picturesMarker = 23;
+$picturesPencil = 40;
+
+echo "На школьной выставке $pictures рисунков <br />";
+echo "Из них $picturesMarker нарисованы фломастерами, $picturesPencil - карандашами, а остальные - красками. Сколько рисунков нарисованы красками? <br />";
+echo "Красками нарисовано: $pictures - $picturesMarker - $picturesPencil = ".($pictures - $picturesMarker - $picturesPencil).' картинок <hr>';
+/* TASK 2 */
+
+/* TASK 3 */
+const CONSTANT = 'Hello, world!';
+
+if (defined('CONSTANT') == true) {
+	echo "Константа CONSTANT существует! <br />";
+}
+
+echo CONSTANT.'<br />';
+echo 'Переопределяю константу ... и <br />';
+
+define('CONSTANT', 100);
+
+echo CONSTANT.'<hr>';
+/* TASK 3 */
+
+/* TASK 4 */
+$age = 0.1;
+echo "Ваш возраст: $age <br />";
+if (($age >= 18) && ($age <= 65)) {
+	echo 'Вам еще работать и работать! <hr>';
+} elseif ($age > 65) {
+	echo 'Вам пора на пенсию. <hr>';
+} elseif (($age < 18) && ($age >= 1)) {
+	echo 'Вам еще рано работать! <hr>';
+} else {
+	echo 'Неизвестный возраст! <hr>';
+}
+/* TASK 4 */
+
+/* TASK 5 */
+$day = 8;
+echo "День $day-й <br />";
+
+switch($day) {
+	case 1:
+		echo 'Это рабочий день! <hr>';
+		break;
+	case 2:
+		echo 'Это рабочий день! <hr>';
+		break;
+	case 3:
+		echo 'Это рабочий день! <hr>';
+		break;
+	case 4:
+		echo 'Это рабочий день! <hr>';
+		break;
+	case 5:
+		echo 'Это рабочий день! <hr>';
+		break;
+	case 6:
+		echo 'Это выходной день! <hr>';
+		break;
+	case 7:
+		echo 'Это выходной день! <hr>';
+		break;
+};
+
+if (($day < 1) || ($day > 7)) {
+	echo 'Вы ввели неизвестный день. <hr>';
+}
+/* TASK 5 */
+
 /* TASK 6 */
 $BMW = [
 	"model" => "X5",
@@ -93,5 +174,4 @@ while ($k < count($arr)) {
 
 echo $newStr;
 /* TASK 8 */
-
 ?>
