@@ -55,9 +55,9 @@ echo '<table style="border-collapse: collapse"><tr>';
 
 for ($i = 1; $i <= 10; $i++) {
 	for ($j = 1; $j <= 10; $j++) {
-		if (($i % 2) && ($j % 2)) {
+		if (!($i % 2) && !($j % 2)) {
 			echo '<td style="border: 1px solid gray; padding: 7px; color: red;">('.$i*$j.')</td>';
-		} elseif (!($i % 2) && !($j % 2)) {
+		} elseif (($i % 2) && ($j % 2)) {
 			echo '<td style="border: 1px solid gray; padding: 7px; color: green;">['.$i*$j.']</td>';
 		} else {
 			echo '<td style="border: 1px solid gray; padding: 7px">'.$i*$j.'</td>';
