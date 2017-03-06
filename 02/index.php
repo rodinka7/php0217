@@ -5,8 +5,8 @@ header('Content-type: text/html; charset=utf-8');
 $arr = ['Hello, world!', 'Today is a wonderful day!', 'The weather is perfect'];
 
 function showStr($arr, $param = false) {
-    for ($i = 0; $i < count($arr); $i++) {
-        echo "<p>{$arr[$i]}</p>";
+    foreach ($arr as $key=>$value) {
+        echo "<p>{$value}</p>";
     }
 
     if ($param === true) {
@@ -22,18 +22,29 @@ echo '<hr>';
 /* TASK 2 */
 function inverse($x) {
     if (!$x) {
-        throw new Exception('На ноль делить нельзя! <br />');
+        throw new Exception('На ноль делить нельзя!');
     }
 }
 
-function testStr($str) {
+function testStr($arr, $str) {
     if (($str != '+') && ($str != '-') && ($str != '*') &&
         ($str != '/') && ($str != '**')) {
         throw new Exception('Введите строку, описывающую арифметическое действие! <br />');
     }
+
+    if (!is_array($arr)) {
+        throw new Exception('Введите массив чисел! <br />');
+    }
+
+    foreach ($arr as $key => $value) {
+        if (!is_int($value)) {
+            throw new Exception('В массиве должны быть только числа! <br />');
+        }
+    }
 }
 
 function calc($str, $numbers) {
+    $newStr = '';
     switch ($str) {
         case '+':
             $result = 0;
@@ -75,12 +86,8 @@ function calc($str, $numbers) {
             $newStr = $numbers[0].' / ';
 
             for ($i = 1; $i < count($numbers); $i++) {
-                try {
-                    inverse($numbers[$i]);
-                } catch (Exception $e) {
-                    echo 'Ошибка: '.$e->getMessage().'<br />';
-                    break;
-                }
+                
+                inverse($numbers[$i]);
 
                 if ($i !== (count($numbers) - 1)) {
                     $newStr .= $numbers[$i].' / ';
@@ -106,73 +113,62 @@ function calc($str, $numbers) {
 }
 
 function countArr($arr, $str) {
-	if (!is_array($arr)) {
-		echo 'Введите массив чисел! <br />';
-		return;
-	}
-
-	for ($i = 0; $i < count($arr); $i++) {
-		if (!is_int($arr[$i])) {
-			echo 'В массиве должны быть только числа! <br />';
-			return;
-		}
-	}
-
-	try {
-        testStr($str);
-    } catch (Exception $e) {
-	    echo 'Ошибка: '.$e->getMessage().'<br />';
-	    return;
-    }
+	testStr($arr, $str);
 
 	calc($str, $arr);
 }
 
-countArr([2,1,6], '*');
+try {
+    countArr([1, 2, 3, 4, 5], '*');
+} catch (Exception $e) {
+    echo 'Ошибка: '.$e->getmessage().'<br />';
+}
 
 echo '<hr>';
 /* TASK 2 */
 
 /* TASK 3 */
-function calcEverything($str, ...$numbers) {
-    for ($i = 0; $i < count($numbers); $i++) {
-        if (!is_int($numbers[$i]) && !is_float($numbers[$i])) {
-            echo 'Введите целые или вещественные числа! <br />';
-            return;
-        }
-    };
-
-    try {
-        testStr($str);
-    } catch (Exception $e) {
-        echo 'Ошибка: '.$e->getMessage().'<br />';
-        return;
+function testArr ($str, $arr) {
+    if (($str != '+') && ($str != '-') && ($str != '*') &&
+        ($str != '/') && ($str != '**')) {
+        throw new Exception('Введите строку, описывающую арифметическое действие! <br />');
     }
+    
+    foreach ($arr as $key => $value) {
+        if (!is_int($value) && !is_float($value)) {
+            throw new Exception('Введите целые или вещественные числа! <br />');
+        }
+    }
+}
+
+function calcEverything($str, ...$numbers) {
+    testArr($str, $numbers);
 
     calc($str, $numbers);
 }
 
-calcEverything('+', 1, 2.5, 3, 4);
+try {
+    calcEverything('-', 1, 2.5, 3.4, 4);
+} catch (Exception $e) {
+    echo 'Ошибка: '.$e->getmessage().'<br />';
+}
 
 echo '<hr>';
 /* TASK 3 */
 
 /* TASK 4 */
 function testNumber($a, $b) {
-    if (!is_int($a) && !is_int($b)) {
+    if (!is_int($a) || !is_int($b)) {
         throw new Exception('Введите целые числа!');
     }
 }
 
 function createTable($a, $b) {
-    try {
-        testNumber($a, $b);
-    } catch (Exception $e) {
-        echo 'Ошибка: '.$e->getMessage().'<br />';
-        return;
-    }
+    
+    testNumber($a, $b);
 
     echo '<table style="border-collapse: collapse;">';
+
     for ($i = 1; $i <= $b; $i++) {
         echo '<tr>';
         for ($j = 1; $j <= $a; $j++) {
@@ -184,7 +180,12 @@ function createTable($a, $b) {
     echo "Выведена таблица $a x $b";
 };
 
-createTable(8,7);
+try {
+    createTable(8, 6);
+} catch (Exception $e) {
+    echo 'Ошибка: '.$e->getmessage().'<br />';
+}
+
 echo '<hr>';
 /* TASK 4 */
 
