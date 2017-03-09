@@ -17,6 +17,7 @@ regForm.addEventListener('submit', function(e) {
         alertPass = document.querySelector('.js-alertPass'),
         alertRegular = document.querySelector('.js-alertRegular'),
         alertRegPass = document.querySelector('.js-alertRegPass'),
+        alertRes = document.querySelector('.js-alertRes'),
         regular = /^[0-9a-zA-Z]+$/,
         regPass = /^[0-9a-zA-Z]{6,20}$/,
         promise,
@@ -32,52 +33,25 @@ regForm.addEventListener('submit', function(e) {
         showError(alertPass);
     }
 
-    data = {
-        login: target.inputEmail3.value,
-        password: target.inputPassword3.value 
-    };
+    data = new FormData(regForm);
 
     promise = new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
 
-        xhr.open('POST', './main.php');
+        xhr.open('POST', 'main.php');
         xhr.send(data);
 
-        xhr.addEventListener('', function(){
-            resolve(response);
+        xhr.addEventListener('readystatechange', function(){
+            if (this.readyState != 4) {
+                return;
+            }
+            resolve(this.response);
         });
     });
 
     promise.then(function(response){
-        console.log(response);
-        alert('Данные успешно отправлены на сервер!');
-
-    })
-
-    regForm.reset();
-});
-
-var selector = "div.starter-template>h1";
-
-var zagolovok = $(selector);
-var zagovol_data = zagolovok.html();
-zagolovok.html('ahaha');
-
-console.log(zagovol_data);
-
-$('#returnback').on('click', function(){
-    // zagolovok.html(zagovol_data)
-
-    $.ajax({
-        url: '/data.php',
-        method: 'post',
-        data: {
-            superdata: zagovol_data //$_POST['superdata']
-        }
-    }).done(function (data) {
-        var json = JSON.parse(data);  //JSON.stringify()
-        var str = json.name + ' - ' + json.occupation + json.superdata;
-        zagolovok.html(str)
+        showError(alertRes);
+        regForm.reset();
     });
 });
 
