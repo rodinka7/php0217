@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+session_start();
 
 if (isset($_POST['inputEmail3']) && isset($_POST['inputPassword3'])) {
 
@@ -10,17 +11,18 @@ if (isset($_POST['inputEmail3']) && isset($_POST['inputPassword3'])) {
 	$sql = 'SELECT * FROM `autorization` ';
 	$result = $connection->query($sql);
 	$users = $result->fetch_all(MYSQLI_ASSOC);
-	//echo '<pre>'.print_r($users,true).'</pre>';
 	
 	foreach ($users as $user) {
-		if (($user['login'] == $login) && ($user['password'] == $pass)) {
+		if (($user['login'] == $login) && ($user['password'] != $pass)) {
+			echo '<div>Вы ввели неверный пароль!</div>';
+			break;
+		} elseif (($user['login'] == $login) && ($user['password'] == $pass)) {
+			$_SESSION['user'] = $user['id'];
 			header('Location: http://php0217/03/list.html');
+		} else {
+			echo '<div>Вы не зарегистрированы! Зарегистрируйтесь, пожалуйста!</div>';
+			break;
 		}
-	}
-
-
-
-	
-	
+	}	
 }
 ?>

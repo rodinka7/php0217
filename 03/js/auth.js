@@ -45,6 +45,17 @@ regForm.addEventListener('submit', function(e) {
     });
 
     promise.then(function(response){
+        var div = document.createElement('div'),
+            container = document.querySelector('.container');
+        
+        div.className = 'alert alert-info';
+        div.innerHTML = response;
+
+        container.appendChild(div);
+
+        showError(div);
+        
         regForm.reset();
+
     });
 });

@@ -52,7 +52,7 @@ regForm.addEventListener('submit', function(e) {
     });
 
     promise.then(function(response){
-        showError(alertRes);
+        //showError(alertRes);
         regForm.reset();
     });
 });

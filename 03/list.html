@@ -50,28 +50,34 @@
     </nav>
 
     <div class="container">
+
+    <div class="alert alert-info js-alertEmpty" role="alert">Все поля формы должны быть заполнены!</div>
+
     <h1>Запретная зона, доступ только авторизированному пользователю</h1>
       <h2>Информация выводится из базы данных</h2>
-      <table class="table table-bordered">
-        <tr>
-          <th>Пользователь(логин)</th>
-          <th>Имя</th>
-          <th>возраст</th>
-          <th>описание</th>
-          <th>Фотография</th>
-          <th>Действия</th>
-        </tr>
-        <tr>
-          <td>vasya99</td>
-          <td>Вася</td>
-          <td>14</td>
-          <td>Эксперт в спорах в интернете</td>
-          <td><img src="http://lorempixel.com/people/200/200/" alt=""></td>
-          <td>
-            <a href="">Удалить пользователя</a>
-          </td>
-        </tr>
-      </table>
+      <form action="" name="formInfo">
+        <table class="table table-bordered">
+          <tr>
+            <th>Пользователь(логин)</th>
+            <th>Имя</th>
+            <th>возраст</th>
+            <th>описание</th>
+            <th>Фотография</th>
+            <th>Действия</th>
+          </tr>
+          <tr>
+            <td><input type="text" class="form-control" placeholder="Логин" name="login"></td>
+            <td><input type="text" class="form-control" placeholder="Имя" name="name"></td>
+            <td><input type="text" class="form-control" placeholder="Год и дата рождения" name="date"></td>
+            <td><input type="text" class="form-control" placeholder="Описание" name="desc"></td>
+            <td><input type="file" class="form-control" placeholder="Загрузить фото" name="file"></td>
+            <td>
+              <a href="">Удалить пользователя</a>
+            </td>
+          </tr>
+        </table>
+        <button type="submit" class="btn btn-default">Добавить пользователя</button>
+      </form>
 
     </div><!-- /.container -->
 
@@ -80,7 +86,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/list.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
   </body>

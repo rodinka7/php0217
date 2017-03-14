@@ -13,7 +13,7 @@ if (isset($_POST['inputEmail3']) && isset($_POST['inputPassword3']) && isset($_P
 
 		if($insert_row){
 			header('Location: http://php0217/03/index.html');
-		}else{
+		} else {
 		    die('Error : ('. $connection->errno .') '. $connection->error);
 		}
 	}
