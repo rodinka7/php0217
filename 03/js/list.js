@@ -3,7 +3,7 @@ window.addEventListener('load', function() {
 	var promise = new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
 
-        xhr.open('POST', 'php/list.php');
+        xhr.open('POST', 'php/secure.php');
         xhr.send();
 
         xhr.addEventListener('readystatechange', function(){
@@ -65,7 +65,7 @@ window.addEventListener('load', function() {
 
 		        showError(div);
 		        
-		        regForm.reset();
+		        formInfo.reset();
 
 		    });
 		});
