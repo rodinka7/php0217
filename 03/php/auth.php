@@ -19,9 +19,6 @@ if (isset($_POST['inputEmail3']) && isset($_POST['inputPassword3'])) {
 		} elseif (($user['login'] == $login) && ($user['password'] == $pass)) {
 			$_SESSION['user'] = $user['id'];
 			header('Location: http://php0217/03/list.html');
-		} else {
-			echo '<div>Вы не зарегистрированы! Зарегистрируйтесь, пожалуйста!</div>';
-			break;
 		}
 	}	
 }
