@@ -9,9 +9,11 @@ $dom = new DOMDocument('1.0', 'UTF-8');
 $purchase = $dom->createElement('div', 'PurchaseOrderNumber: '.$attr['PurchaseOrderNumber']);
 $purchaseDate = $dom->createElement('div', 'OrderDate: '.$attr['OrderDate']);
 $purchase->appendChild($purchaseDate);
+$hr = $dom->createElement('hr');
+$purchase->appendChild($hr);
 
 foreach ($xml as $key=>$value) {
-	
+
 	if ($value->attributes()) {
 		$attrs = $value->attributes();
 		$deliveryType = $dom->createElement('div', 'Delivery type: '.$attrs);
@@ -34,15 +36,12 @@ foreach ($xml as $key=>$value) {
 		$address->appendChild($state);
 		$address->appendChild($zip);
 		$address->appendChild($country);
-		
-		$purchase->appendChild($address);
 
 	case 'DeliveryNotes':
 		$notes = $dom->createElement('div', 'DeliveryNotes: '.$value);
 
-		$purchase->appendChild($notes);
-
 	case 'Items':
+		$goods = $dom->createElement('div', 'Goods: ');
 		
 		foreach ($value->Item as $data) {
 			$attr = $data->attributes();
@@ -64,14 +63,20 @@ foreach ($xml as $key=>$value) {
 				$good->appendChild($date);
 			}
 
-			$purchase->appendChild($good);			
+			$goods->appendChild($good);			
 		}	
 	}
 }
 
+$purchase->appendChild($address);
+$hr = $dom->createElement('hr');
+$purchase->appendChild($hr);
+$purchase->appendChild($notes);
+$hr = $dom->createElement('hr');
+$purchase->appendChild($hr);
+$purchase->appendChild($goods);
+
 $dom->appendChild($purchase);
 
-echo '<pre>';
 echo $dom->saveHTML();
-
 ?>
