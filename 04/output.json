@@ -1,1 +1,1 @@
-[{"name":"Jack","age":28,"occupation":"web developper","family":{"wife":"Marry","child":"Dan"},"interests":["football","tennis","travelling"]},{"name":"Alex","age":30,"occupation":"web designer","family":{"wife":"Kate","child":"Liza"},"interests":["boxing","tennis","travelling"]}]
+{"name":"Terry","address":{"country":"USA","state":"CA","city":"Las Vegas","streeet":"1-st avenue"},"occupation":"web developer","interests":["swimming","surfing","jogging"]}
