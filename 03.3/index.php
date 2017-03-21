@@ -22,6 +22,6 @@
     </nav>
 
     <div class="container">
-      <?php require_once $_GET['content'].'Template.php';?>
+      <?php require_once('security.php');?>
     </div><!-- /.container -->
 <?php require_once 'footer.php'?>

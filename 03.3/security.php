@@ -1,7 +1,13 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['user']) && empty($_SESSION['user'])){
-	header('Location: http://php0217/03/index.html');
-}
+<?php 
+if ($_SERVER['REQUEST_URI'] == '/03.3/') {
+	require_once 'mainTemplate.php'; 
+} elseif ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=reg') {
+	require_once 'regTemplate.php';
+} else {
+	if (isset($_SESSION['user']) && !empty($_SESSION['user'])){
+		require_once $_GET['content'].'Template.php';
+	} else {
+		require_once('mainTemplate.php');
+	}
+} 
 ?>
