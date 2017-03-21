@@ -24,7 +24,7 @@ if (!isset($_POST['inputEmail3']) || !isset($_POST['inputPassword3']) || !isset(
 		$insert_row = $connection->query("INSERT INTO autorization (login, password) VALUES($login, $password)");
 
 		if($insert_row){
-			header('Location: http://php0217/03.3/index.php?content=main');
+			header('Location: http://php0217/03/index.php?content=main');
 		} else {
 		    die('Error : ('. $connection->errno .') '. $connection->error);
 		}

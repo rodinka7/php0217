@@ -1,7 +1,7 @@
 <?php 
-if ($_SERVER['REQUEST_URI'] == '/03.3/') {
+if ($_SERVER['REQUEST_URI'] == '/03/') {
 	require_once 'mainTemplate.php'; 
-} elseif ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=reg') {
+} elseif ($_SERVER['REQUEST_URI'] == '/03/index.php?content=reg') {
 	require_once 'regTemplate.php';
 } else {
 	if (isset($_SESSION['user']) && !empty($_SESSION['user'])){

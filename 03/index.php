@@ -12,10 +12,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active" <?php ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=main' ? 'class="active"' : ""); ?>><a href="/03.3/index.php?content=main">Авторизация</a></li>
-            <li <?php ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=reg' ? 'class="active"' : ""); ?>><a href="/03.3/index.php?content=reg">Регистрация</a></li>
-            <li <?php ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=list' ? 'class="active"' : ""); ?>><a href="/03.3/index.php?content=list">Список пользователей</a></li>
-            <li <?php ($_SERVER['REQUEST_URI'] == '/03.3/index.php?content=filelist' ? 'class="active"' : ""); ?>><a href="/03.3/index.php?content=filelist">Список файлов</a></li>
+            <li class="active" <?php ($_SERVER['REQUEST_URI'] == '/03/index.php?content=main' ? 'class="active"' : ""); ?>><a href="/03/index.php?content=main">Авторизация</a></li>
+            <li <?php ($_SERVER['REQUEST_URI'] == '/03/index.php?content=reg' ? 'class="active"' : ""); ?>><a href="/03/index.php?content=reg">Регистрация</a></li>
+            <li <?php ($_SERVER['REQUEST_URI'] == '/03/index.php?content=list' ? 'class="active"' : ""); ?>><a href="/03/index.php?content=list">Список пользователей</a></li>
+            <li <?php ($_SERVER['REQUEST_URI'] == '/03/index.php?content=filelist' ? 'class="active"' : ""); ?>><a href="/03/index.php?content=filelist">Список файлов</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

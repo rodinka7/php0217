@@ -22,7 +22,7 @@
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Зарегистрироваться</button>
         <br><br>
-        Зарегистрированы? <a href="index.html">Авторизируйтесь</a>
+        Зарегистрированы? <a href="/03/index.php?content=main">Авторизируйтесь</a>
       </div>
     </div>
   </form>

@@ -16,7 +16,7 @@
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Войти</button>
         <br><br>
-        Нет аккаунта? <a href="reg.html">Зарегистрируйтесь</a>
+        Нет аккаунта? <a href="/03/index.php?content=reg">Зарегистрируйтесь</a>
       </div>
     </div>
   </form>
