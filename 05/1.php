@@ -1,9 +1,6 @@
 <?php
 
-trait Engine {
-	private $speed;
-	public $temperature = 22;
-
+class Engine {
 	public function turnEngine ($turn) {
 		if ($turn) {
 			echo 'Двигатель включен! <br />';
@@ -33,39 +30,11 @@ trait Engine {
 	private function turnOncondition(){
 		$this->temperature -= 10;
 		echo "Температура снизилась. Теперь она составляет $this->temperature <br />";
-	}
-
-	public function move ($power, $meters, $speed, $direction) {
-		$space = 0;
-
-		$this->speed = $this->receiveSpeed($speed, $power);
-		
-		if ($direction == 'forward') {
-			while ($space < $meters) {
-				$space += $this->speed;
-
-				$this->temperature += ($this->speed/10)*5;
-				
-				$this->condition();
-
-				echo "Автомобиль проехал $space м <br />";
-			}
-		} elseif ($direction == 'backward') {
-			while ($space > -$meters) {
-				$space -= $this->speed;
-
-				$this->temperature += ($this->speed/10)*5;
-			
-				$this->condition();
-				
-				echo "Автомобиль проехал $space м назад <br />";
-			}
-		}
+		$this->condition();
 	}
 }
 
 trait Transmission {
-
 	public function switchTransmission($turn){
 		if ($turn) {
 			echo 'Вы включили передачу! <br />';
@@ -97,22 +66,130 @@ trait TransmissionBack {
 	}
 }
 
-class Car {
-	use Engine;
+class Car extends Engine{
+
 	use Transmission;
 	use TransmissionBack;
+	use TransmissionManual;
+	use TransmissionAuto;
 }
 
 class Niva extends Car {
-	use TransmissionManual;
+	private $speed;
+	public $temperature = 22;
+	private $power;
+
+	public function __construct($power) {
+		$this->power = $power;
+	}
+
+	public function move ($time, $speed, $direction) {
+		$seconds = 1;
+		$space = 0;
+
+		$power = $this->power;
+
+		if ($direction == 'backward') {
+			$this->transmissionBackward();
+		}
+
+		$this->speed = $this->receiveSpeed($speed, $power);
+
+		$this->transmissionManual($this->speed);
+		
+		if ($direction == 'forward') {
+			while ($seconds <= $time) {
+				$space += $this->speed;
+
+				$this->temperature += ($this->speed/10)*5;
+
+				echo "Автомобиль проехал $space метров за $seconds секунд<br />";
+
+				$this->condition();
+
+				$seconds++;
+			}
+
+		} elseif ($direction == 'backward') {
+			while ($seconds <= $time) {
+				$space -= $this->speed;
+
+				$this->temperature += ($this->speed/10)*5;
+				
+				echo "Автомобиль проехал $space метров назад за $seconds секунд<br />";
+				$this->condition();
+				$seconds++;
+			}
+		}
+	}
 }	
 
-$newNiva = new Niva(10);
+class Toyota extends Car {
+	private $speed;
+	public $temperature = 22;
+	private $power;
+
+	public function __construct($power) {
+		$this->power = $power;
+	}
+
+	public function move ($time, $speed, $direction) {
+		$seconds = 1;
+		$space = 0;
+
+		$power = $this->power;
+
+		if ($direction == 'backward') {
+			$this->transmissionBackward();
+		}
+
+		$this->speed = $this->receiveSpeed($speed, $power);
+
+		$this->transmissionAuto();
+		
+		if ($direction == 'forward') {
+			while ($seconds <= $time) {
+				$space += $this->speed;
+
+				$this->temperature += ($this->speed/10)*5;
+				
+				echo "Автомобиль проехал $space метров за $seconds секунд<br />";
+
+				$this->condition();
+
+				$seconds++;
+			}
+
+		} elseif ($direction == 'backward') {
+			while ($seconds <= $time) {
+				$space -= $this->speed;
+
+				$this->temperature += ($this->speed/10)*5;
+				
+				echo "Автомобиль проехал $space метров назад за $seconds секунд<br />";
+
+				$this->condition();
+
+				$seconds++;
+			}
+		}
+	}
+}	
+
+$newNiva = new Niva(30);
 
 $newNiva->turnEngine(true);
 $newNiva->switchTransmission(true);
-$newNiva->move(5, 200, 10, 'forward');
+$newNiva->move(3, 200, 'backward');
 $newNiva->turnEngine(false);
 $newNiva->switchTransmission(false);
 
+echo '<hr>';
+$newToyota = new Toyota(80);
+
+$newToyota->turnEngine(true);
+$newToyota->switchTransmission(true);
+$newToyota->move(5, 300, 'forward');
+$newToyota->turnEngine(false);
+$newToyota->switchTransmission(false);
 ?>
