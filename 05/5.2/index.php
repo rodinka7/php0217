@@ -1,8 +1,7 @@
 <?php
-require_once 'core/model.php';
-require_once 'core/controller.php';
-require_once 'core/view.php';
-require_once 'core/route.php';
+if (!ini_get('display_errors')) {
+    ini_set('display_errors', '1');
+}
 
-(new Route())->run();
+require_once 'app/app.php';
 ?>
