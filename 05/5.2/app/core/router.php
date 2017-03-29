@@ -3,19 +3,18 @@
 class Route {
 
     static function start(){
-
-        $controller_name = 'Main';
-        $action_name = 'index';
-
+        $controller_name = 'main';
+        $action_name = 'main';
         // http://mvc/controller/action
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $routes = explode('?', $_SERVER['REQUEST_URI']);
         // получаем контроллер
-        if(!empty($routes[3])){
-            $controller_name = $routes[3];
+        if(!empty($routes[1])){
+            $controller_name = $routes[1];
         }
+       
         // получаем действие
-        if(!empty($routes[3])){
-            $action_name = $routes[3];
+        if(!empty($routes[1])){
+            $action_name = $routes[1];
         }
 
         $model_name = 'Model_'.$controller_name;
@@ -24,7 +23,7 @@ class Route {
 
         $model_file = strtolower($model_name).'.php';
         $model_path = dirname(__DIR__).'\models\\'.$model_file;
-        
+     
         if(file_exists($model_path)){
             include $model_path;
         }
