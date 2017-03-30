@@ -7,14 +7,15 @@ class Route {
         $action_name = 'main';
         // http://mvc/controller/action
         $routes = explode('?', $_SERVER['REQUEST_URI']);
+       
+        // получаем действие
+        if(!empty($routes[2])){
+            $action_name = $routes[2];
+        }
+
         // получаем контроллер
         if(!empty($routes[1])){
             $controller_name = $routes[1];
-        }
-       
-        // получаем действие
-        if(!empty($routes[1])){
-            $action_name = $routes[1];
         }
 
         $model_name = 'Model_'.$controller_name;
@@ -23,7 +24,7 @@ class Route {
 
         $model_file = strtolower($model_name).'.php';
         $model_path = dirname(__DIR__).'\models\\'.$model_file;
-     
+       
         if(file_exists($model_path)){
             include $model_path;
         }
