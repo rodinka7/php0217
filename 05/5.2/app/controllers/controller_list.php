@@ -10,6 +10,7 @@ class Controller_list extends Controller {
 
     public function action_main() {
     	session_start();
+    	
     	$users = $this->modelList->get_data();
 
     	if (!isset($_SESSION['user']) || empty($_SESSION['user'])){
@@ -18,23 +19,16 @@ class Controller_list extends Controller {
 			$imgs = scandir(dirname(__DIR__).'/img/');
 	        
 	        foreach ($imgs as $img) {
-	        	foreach ($users as $user) {
-		          
-		          if ($img == $user['photo']) {
-		            $user['answer'] = true;
-		            echo '<td><img src="./img/'.$user['photo'].'" style="width: 200px;"></td>';
-		          }
-		          
+	        	for ($i = 0; $i < count($users); $i++) {
+	        		if ($img == $users[$i]['photo']) {
+			            $users[$i]['answer'] = true;
+		          	}	
 	        	}
-	        }
-	        
-
-	        if (!$answer) {
-	          echo '<td>У пользователя удалена аватарка :(</td>';
 	        }
 
         	$this->view->generate('list_view.twig', array(
-        		'users' => $users
+        		'users' => $users,
+        		'uri' => 'list'
         	));
     	}
     }
@@ -95,6 +89,33 @@ class Controller_list extends Controller {
 				echo 'Файл не удалось загрузить в папку! <br />';
 			}
 			/* Сохранение в папку */
+		}
+    }
+
+    public function action_delete() {
+    	$routes = explode('?', $_SERVER['REQUEST_URI']);
+    	$id = $routes[3];
+
+    	$users = $this->modelList->get_data();
+
+    	foreach ($users as $user) {
+			if ($user['id'] == $id) {
+				$sql = 'delete from users where (id ='.$id.')';
+		 		$result = $this->model->connection->query($sql);
+
+		 		$img = $user['photo'];
+		 		
+		 		$files = scandir('app/img/');
+		 		
+		 		foreach ($files as $file) {
+		 			if ($file == $img) {
+		 				unlink('app/img/'.$img);
+		 			}
+		 		}
+		 		if ($result) {
+		 			echo 'Пользователь был успешно удален!';
+		 		}
+			}
 		}
     }
 }

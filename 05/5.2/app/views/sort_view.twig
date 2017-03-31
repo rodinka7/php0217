@@ -1,0 +1,46 @@
+{% extends 'layout.twig'%}
+
+{% block content %}
+	<h1>Запретная зона, доступ только авторизированному пользователю</h1>
+	<h2>Информация выводится из базы данных</h2>
+	<form action="?sort?receive" method="POST" enctype="multipart/form-data">
+		<table class="table table-bordered">
+			<tr>
+				<th>Логин пользователя</th>
+				<th>Действие</th>
+				<th>Загруженные файлы</th>
+			</tr>
+			<tr>
+				<td>				   
+					<input type="text" class="form-control" name="inputEmail3" placeholder="Введите логин">   
+				</td>
+				<td>
+					<button type="submit" class="btn btn-default">Показать загруженные файлы</button>			
+				</td>
+				<td>
+					{% if file %}
+						{{file.login}} загрузил {{file.photo}} файл
+					{% else %}
+						У пользователя нет файлов!
+					{% endif %} 
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<table class="table table-bordered">
+	    <tr>
+	    <th>Пользователь(логин)</th>
+	    <th>возраст</th>
+	    <th>Sort</th>
+	    </tr>
+	    {% for user in users %}
+			<tr>
+				<td>{{user.login}}</td>
+				<td>{{user.age}}</td>
+				<td>{{user.sort}}</td>
+			</tr>
+		{% endfor %}		    
+	  </table>
+	
+{% endblock %}

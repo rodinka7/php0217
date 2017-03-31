@@ -9,7 +9,9 @@ class Controller_reg extends Controller {
 	}
 
     public function action_main() {
-        $this->view->generate('regist_view.twig', array());
+        $this->view->generate('regist_view.twig', array(
+        	'uri' => 'reg'
+        ));
     }
 
     public function action_registration() {

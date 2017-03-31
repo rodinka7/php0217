@@ -9,7 +9,9 @@ class Controller_main extends Controller {
 	}
 
     public function action_main() {
-        $this->view->generate('main_view.twig', array());
+        $this->view->generate('main_view.twig', array(
+        	'uri' => 'main'
+        ));
     }
 
     public function action_login() {
@@ -28,8 +30,8 @@ class Controller_main extends Controller {
 					break;
 				} elseif (($user['login'] == $login) && ($user['password'] == crypt($pass,'happy'))) {
 					$_SESSION['user'] = $user['id'];
-			
-					$this->view->generate('list_view.twig', array());
+					
+					header('Location: http://php0217/05/5.2/?list');
 				}
 			}	
 		} else {

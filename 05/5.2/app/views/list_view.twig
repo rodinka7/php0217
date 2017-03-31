@@ -38,25 +38,14 @@
 				<td>{{user.name}}</td>
 				<td>{{user.age}}</td>
 				<td>{{user.description}}</td>
-				<td><a href="deleteUser.php?id='.$user['id'].'">Удалить пользователя</a></td>
+				{% if user.answer %}
+					<td><img src="app/img/{{user.photo}}" style="width: 200px;"></td>
+				{% else %}
+					<td>У пользователя удалена аватарка :(</td>
+				{% endif %}
+				<td><a href="?list?delete?{{user.id}}">Удалить пользователя</a></td>
 			</tr>
 		{% endfor %}		    
-	       
-	        $imgs = scandir('./img/');
-	        $answer = false;
-	        foreach ($imgs as $img) {
-	          if ($img == $user['photo']) {
-	            $answer = true;
-	            echo '<td><img src="./img/'.$user['photo'].'" style="width: 200px;"></td>';
-	          }
-	        }
-	        if (!$answer) {
-	          echo '<td>У пользователя удалена аватарка :(</td>';
-	        }
-	        echo '<td><a href="deleteUser.php?id='.$user['id'].'">Удалить пользователя</a></td>';
-	        echo '</tr>';  
-	      }
-	    ?>-->
 	  </table>
 	</form>
 {% endblock %}
