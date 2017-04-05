@@ -1,4 +1,5 @@
 <?php
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Controller_filelist extends Controller {
 
@@ -7,6 +8,10 @@ class Controller_filelist extends Controller {
 
 		$this->model = new Model_filelist();
 	}
+
+	private function getExtension($filename) {
+    	return end(explode(".", $filename));
+    }
 
     public function action_main() {
     	session_start();
@@ -20,19 +25,37 @@ class Controller_filelist extends Controller {
 			      if (($this->getExtension($photo) == 'jpg') 
 			      || ($this->getExtension($photo) == 'png') 
 			      || ($this->getExtension($photo) == 'gif')) {
-			        $newPhotos[] = $photo;   
-			      }    
-	    	}
-        	$this->view->generate('filelist_view.twig', array(
+			        
+					$image = Image::make('app/img/'.$photo);
+					$imageWidth = $image->width();
+					$imageHeight = $image->height();
+
+					$image
+					    ->rotate(45)
+						->text("Loftschool", $image->width() / 2, $image->height() / 2, function($font) {
+					        $font->file('template/fonts/arial.ttf');
+					        $font->size('32');
+					        $font->color('#8c0707');
+					        $font->align('center');
+					        $font->valign('center');
+					    })
+					    ->rotate(-45)
+					    ->crop($imageWidth, $imageHeight, intval($imageHeight/2), intval($imageWidth/2))
+					    ->resize(300, null, function($img){
+					    	$img->aspectRatio();
+					    })
+					    ->save('app/img/'.$photo);
+				        
+				        $newPhotos[] = $photo; 
+			    	}
+			}
+
+			$this->view->generate('filelist_view.twig', array(
         		'photos' => $newPhotos,
         		'uri' => 'filelist'
         	));
-		}
-    }
-
-    private function getExtension($filename) {
-    	return end(explode(".", $filename));
-    }
+    	}
+	}
 
     public function action_delete(){
 
