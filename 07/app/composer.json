@@ -1,0 +1,10 @@
+{
+    "require": {
+        "twig/twig": "^2.3",
+        "phpmailer/phpmailer": "^5.2",
+        "google/recaptcha": "^1.1",
+        "intervention/image": "^2.3",
+        "illuminate/database": "^5.4",
+        "wixel/gump": "^1.5"
+    }
+}

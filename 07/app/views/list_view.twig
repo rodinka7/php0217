@@ -1,0 +1,51 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<h1>Запретная зона, доступ только авторизированному пользователю</h1>
+	<h2>Информация выводится из базы данных</h2>
+	<form action="?list?addUser" method="POST" enctype="multipart/form-data">
+	  <table class="table table-bordered">
+	    <tr>
+	      <th>Пользователь(логин)</th>
+	      <th>Имя</th>
+	      <th>возраст</th>
+	      <th>описание</th>
+	      <th>Фотография</th>
+	    </tr>
+	    <tr>
+	      <td><input type="text" class="form-control" placeholder="Логин" name="login"></td>
+	      <td><input type="text" class="form-control" placeholder="Имя" name="name"></td>
+	      <td><input type="text" class="form-control" placeholder="дата-месяц-год рождения" name="date"></td>
+	      <td><input type="text" class="form-control" placeholder="Описание" name="desc"></td>
+	      <td><input type="file" class="form-control" placeholder="Загрузить фото" name="file"></td>
+	    </tr>
+	  </table>
+	  <button type="submit" class="btn btn-default">Добавить пользователя</button>
+	</form>
+	<form enctype="multipart/form-data" style="margin-top: 20px;">
+	  <table class="table table-bordered">
+	    <tr>
+	    <th>Пользователь(логин)</th>
+	    <th>Имя</th>
+	    <th>возраст</th>
+	    <th>описание</th>
+	    <th>Фотография</th>
+	    <th>Действия</th>
+	    </tr>
+	    {% for user in users %}
+			<tr>
+				<td>{{user.login}}</td>
+				<td>{{user.name}}</td>
+				<td>{{user.age}}</td>
+				<td>{{user.description}}</td>
+				{% if user.answer %}
+					<td><img src="app/img/{{user.photo}}"></td>
+				{% else %}
+					<td>У пользователя удалена аватарка :(</td>
+				{% endif %}
+				<td><a href="?list?delete?{{user.id}}">Удалить пользователя</a></td>
+			</tr>
+		{% endfor %}		    
+	  </table>
+	</form>
+{% endblock %}
