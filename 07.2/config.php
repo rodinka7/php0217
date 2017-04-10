@@ -23,6 +23,21 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
+Capsule::schema()->create('goods', function($table){
+    $table->increments('id');
+    $table->string('name')->nullable();
+    $table->string('art')->nullable();
+    $table->string('producer')->nullable();
+    $table->integer('count')->default(0);
+    $table->integer('price')->default(0);
+    $table->string('category')->nullable();
+});
+
+Capsule::schema()->create('categories', function($table) {
+    $table->increments('id');
+    $table->string('category')->nullable();
+});
+
 class Good extends Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 }

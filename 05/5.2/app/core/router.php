@@ -2,59 +2,150 @@
 
 class Route {
 
-    static function start(){
-        $controller_name = 'main';
-        $action_name = 'main';
-        // http://mvc/controller/action
-        $routes = explode('?', $_SERVER['REQUEST_URI']);
-       
-        // получаем действие
-        if(!empty($routes[2])){
-            $action_name = $routes[2];
+   protected $modelPath        = 'app/models/';
+   protected $controllerPath   = 'app/controllers/';
+
+
+   protected $prefixController = 'controller_';
+   protected $prefixModel      = 'model_';
+   protected $prefixAction     = 'action_';
+
+   protected $controller       = 'Main';
+   protected $model            = 'Main';
+   protected $action           = 'main';
+
+   protected $url;
+   protected $partsUrl;
+   
+   protected $controllerName   = 'Main';
+   protected $modelName        = 'Main';
+
+    public function __construct()
+    {
+        $this->url = $_SERVER['REQUEST_URI'];
+        $this->parse();
+
+        $this->includeFile();
+
+    }
+
+    protected function parse()
+    {
+        $this->partsUrl = explode('/', $this->url);
+
+        $this->getControllerPath();
+        $this->getModelPath();
+
+        $this->getControllerName();
+        $this->getModelName();
+        $this->getActionName();
+
+    }
+
+    protected function getControllerName()
+    {
+        if( empty($this->partsUrl[3]) === false)
+        {
+            $this->controllerName = ucwords($this->prefixController) . ucwords($this->partsUrl[3]);
+        } else{
+            $this->controllerName = ucwords($this->prefixController) . ucwords( $this->controllerName );
         }
 
-        // получаем контроллер
-        if(!empty($routes[1])){
-            $controller_name = $routes[1];
+    }
+    protected function getModelName()
+    {
+        if( empty($this->partsUrl[3]) === false)
+        {
+            $this->modelName = ucwords( $this->prefixModel) . ucwords( $this->partsUrl[3] );
+        } else{
+            $this->modelName = ucwords( $this->prefixModel) . ucwords( $this->modelName );
         }
 
-        $model_name = 'Model_'.$controller_name;
-        $controller_name = 'Controller_'.$controller_name;
-        $action_name = 'action_'.$action_name;
-
-        $model_file = strtolower($model_name).'.php';
-        $model_path = dirname(__DIR__).'\models\\'.$model_file;
-       
-        if(file_exists($model_path)){
-            include $model_path;
+    }
+    protected function getActionName()
+    {
+        if( empty($this->partsUrl[4]) === false)
+        {
+            $this->action = $this->prefixAction . $this->partsUrl[4];
+        } else{
+            $this->action = $this->prefixAction.$this->action;
         }
 
-        $controller_file = strtolower($controller_name).'.php';
-        $controller_path = dirname(__DIR__).'\controllers\\'.$controller_file;
+    }
 
-        if(file_exists($controller_path)){
-            include $controller_path;
+    protected function getControllerPath()
+    {
+        if( empty($this->partsUrl[3]) === false)
+        {
+            $this->controller = $this->controllerPath . $this->normalizeStringFileName( $this->prefixController . $this->partsUrl[3] );
+        } else{
+            $this->controller = $this->controllerPath . $this->normalizeStringFileName( $this->prefixController . $this->controller );
+        }
+    }
+
+
+    protected function getModelPath()
+    {
+        if( empty($this->partsUrl[3]) === false)
+        {
+            $this->model = $this->modelPath . $this->normalizeStringFileName( $this->prefixModel . $this->partsUrl[3] );
+        } else{
+            $this->model = $this->modelPath . $this->normalizeStringFileName( $this->prefixModel . $this->model );
+        }
+    }
+
+    protected function includeFile()
+    {
+        if($this->isFileExist($this->controller))
+        {
+            $this->includeController();
         }else{
-            Route::ErrorPage404();
+            $this->ErrorPage404();
         }
 
-        $controller = new $controller_name;
-        $action = $action_name;
+        if($this->isFileExist($this->model))
+        {
+            $this->includeModel();
+        }
+    }
+    protected function includeModel()
+    {
+         include $this->model;
+    }
+    protected function includeController()
+    {
+        return include $this->controller;
+    }
 
+    protected function isFileExist($fileName) : bool
+    {
+        return file_exists($fileName);
+    }
+    protected function normalizeStringFileName(string $someString) : string
+    {
+        return strtolower($someString).'.php';
+    }
+
+    public function ErrorPage404()
+    {
+        $host = 'http://'.$_SERVER['HTTP_HOST'] . '/';
+
+        header('HTTP/1.1 404 Not Found');
+        header('Status: 404 Not Found');
+        header('Location:'. $host .'404');
+    }
+
+    public function run()
+    {
+
+        $controller = new $this->controllerName;
+        $action     = $this->action;
+       
         if(method_exists($controller, $action)){
             $controller->$action();
         }else{
-            Route::ErrorPage404();
+            $this->ErrorPage404();
         }
-
     }
-
-    static function ErrorPage404(){
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        header('HTTP/1.1 404 Not Found');
-        header('Status: 404 Not Found');
-        header('Location:'.$host.'404');
-    }
-
 }
 ?>
