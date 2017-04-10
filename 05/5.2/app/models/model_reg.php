@@ -21,40 +21,42 @@ class Model_Reg extends Model {
       	
       		$users = $result->fetch_all(MYSQLI_ASSOC);
 			
-      		foreach ($users as $user) {
-      			if ($_POST['login'] == $user['login']) {
-      				$errors[] = 'Такой пользователь уже существует!';
-      			} else {
-					if (empty($_POST['login']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordCheck'])) {
-						$errors[] = 'Все поля должны быть заполнены!';
-					} elseif (empty($matchLogin)) {
-						$errors[] = 'Логин должен содержать только латинские буквы и цифры!';
-					} elseif (empty($matchEmail)) {
-						$errors[] = 'Неверный формат электронной почты!';
-					} elseif ($_POST['passwordCheck'] != $_POST['password']) {
-						$errors[] = 'Пароли должны совпадать!';
-					} elseif (!$this->recaptcha()) {
-						$errors[] = 'Вы РОБОТ!!!!!';
-					} else {
-						$login = '"'.$this->connection->real_escape_string($_POST['login']).'"';
-						$email = '"'.$this->connection->real_escape_string($_POST['email']).'"';
-						$passw = crypt($pass, 'happy');
-						$password = '"'.$this->connection->real_escape_string($passw).'"';
-						
-						$insert_row = $this->connection->query("INSERT INTO users (login, password, email) VALUES($login, $password, $email)");
+			if (!empty($users)) {
+				foreach ($users as $user) {
+	      			if ($_POST['login'] == $user['login']) {
+	      				$errors[] = 'Такой пользователь уже существует!';
+	      			}
+	      		}
+			}
+      		
+			if (empty($_POST['login']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordCheck'])) {
+				$errors[] = 'Все поля должны быть заполнены!';
+			} elseif (empty($matchLogin)) {
+				$errors[] = 'Логин должен содержать только латинские буквы и цифры!';
+			} elseif (empty($matchEmail)) {
+				$errors[] = 'Неверный формат электронной почты!';
+			} elseif ($_POST['passwordCheck'] != $_POST['password']) {
+				$errors[] = 'Пароли должны совпадать!';
+			} elseif (!$this->recaptcha()) {
+				$errors[] = 'Вы РОБОТ!!!!!';
+			} else {
+				$login = '"'.$this->connection->real_escape_string($_POST['login']).'"';
+				$email = '"'.$this->connection->real_escape_string($_POST['email']).'"';
+				$passw = crypt($_POST['password'], 'happy');
+				$password = '"'.$this->connection->real_escape_string($passw).'"';
+				
+				$insert_row = $this->connection->query("INSERT INTO users (login, password, email) VALUES($login, $password, $email)");
 
-						if ($insert_row) {
-							$errors[] = 'Данные успешно сохранены в базу данных!';
-							$this->sendMail($_POST['email']);
-							$data['login'] = $_POST['login'];
+				if ($insert_row) {
+					$errors[] = 'Данные успешно сохранены в базу данных!';
+					$this->sendMail($_POST['email']);
+					$data['login'] = $_POST['login'];
 
-							header('Location: http://php0217/05/5.2/');
-						} else {
-							$errors[] = 'При сохранении в базу данных возникла ошибка :(';
-						}
-					}
+					header('Location: http://php0217/05/5.2/');
+				} else {
+					$errors[] = 'При сохранении в базу данных возникла ошибка :(';
 				}
-      		}
+			}
 
 			$data['errors'] = $errors;
 
@@ -99,8 +101,6 @@ class Model_Reg extends Model {
 		   return true;
 		}
     }
-
-
 }
 
 ?>

@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Запретная зона, доступ только авторизированному пользователю</h1>
 	<h2>Информация выводится из базы данных</h2>
-	<form action="?list?addUser" method="POST" enctype="multipart/form-data">
+	<form action="" method="POST" enctype="multipart/form-data">
 	  <table class="table table-bordered">
 	    <tr>
 	      <th>Пользователь(логин)</th>
@@ -16,8 +16,8 @@
 	      <td><input type="text" class="form-control" placeholder="Логин" name="login"></td>
 	      <td><input type="text" class="form-control" placeholder="Имя" name="name"></td>
 	      <td><input type="text" class="form-control" placeholder="дата-месяц-год рождения" name="date"></td>
-	      <td><input type="text" class="form-control" placeholder="Описание" name="desc"></td>
-	      <td><input type="file" class="form-control" placeholder="Загрузить фото" name="file"></td>
+	      <td><input type="text" class="form-control" placeholder="Описание" name="description"></td>
+	      <td><input type="file" class="form-control" placeholder="Загрузить фото" name="image"></td>
 	    </tr>
 	  </table>
 	  <button type="submit" class="btn btn-default">Добавить пользователя</button>
@@ -38,12 +38,12 @@
 				<td>{{user.name}}</td>
 				<td>{{user.age}}</td>
 				<td>{{user.description}}</td>
-				{% if user.answer %}
-					<td><img src="app/img/{{user.photo}}" style="width: 200px;"></td>
+				{% if user.image %}
+					<td><img src="app/img/{{user.image}}" style="width: 200px;"></td>
 				{% else %}
 					<td>У пользователя удалена аватарка :(</td>
 				{% endif %}
-				<td><a href="?list?delete?{{user.id}}">Удалить пользователя</a></td>
+				<td><a href="list/?id={{user.id}}">Удалить пользователя</a></td>
 			</tr>
 		{% endfor %}		    
 	  </table>
