@@ -44,9 +44,9 @@ class Route {
 
     protected function getControllerName()
     {
-        if( empty($this->partsUrl[3]) === false)
+        if( empty($this->partsUrl[2]) === false)
         {
-            $this->controllerName = ucwords($this->prefixController) . ucwords($this->partsUrl[3]);
+            $this->controllerName = ucwords($this->prefixController) . ucwords($this->partsUrl[2]);
         } else{
             $this->controllerName = ucwords($this->prefixController) . ucwords( $this->controllerName );
         }
@@ -54,9 +54,9 @@ class Route {
     }
     protected function getModelName()
     {
-        if( empty($this->partsUrl[3]) === false)
+        if( empty($this->partsUrl[2]) === false)
         {
-            $this->modelName = ucwords( $this->prefixModel) . ucwords( $this->partsUrl[3] );
+            $this->modelName = ucwords( $this->prefixModel) . ucwords( $this->partsUrl[2] );
         } else{
             $this->modelName = ucwords( $this->prefixModel) . ucwords( $this->modelName );
         }
@@ -64,9 +64,9 @@ class Route {
     }
     protected function getActionName()
     {
-        if( empty($this->partsUrl[4]) === false)
+        if( empty($this->partsUrl[3]) === false)
         {
-            $this->action = $this->prefixAction . $this->partsUrl[4];
+            $this->action = $this->prefixAction . $this->partsUrl[3];
         } else{
             $this->action = $this->prefixAction.$this->action;
         }
@@ -75,9 +75,9 @@ class Route {
 
     protected function getControllerPath()
     {
-        if( empty($this->partsUrl[3]) === false)
+        if( empty($this->partsUrl[2]) === false)
         {
-            $this->controller = $this->controllerPath . $this->normalizeStringFileName( $this->prefixController . $this->partsUrl[3] );
+            $this->controller = $this->controllerPath . $this->normalizeStringFileName( $this->prefixController . $this->partsUrl[2] );
         } else{
             $this->controller = $this->controllerPath . $this->normalizeStringFileName( $this->prefixController . $this->controller );
         }
@@ -86,9 +86,9 @@ class Route {
 
     protected function getModelPath()
     {
-        if( empty($this->partsUrl[3]) === false)
+        if( empty($this->partsUrl[2]) === false)
         {
-            $this->model = $this->modelPath . $this->normalizeStringFileName( $this->prefixModel . $this->partsUrl[3] );
+            $this->model = $this->modelPath . $this->normalizeStringFileName( $this->prefixModel . $this->partsUrl[2] );
         } else{
             $this->model = $this->modelPath . $this->normalizeStringFileName( $this->prefixModel . $this->model );
         }

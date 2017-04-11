@@ -1,5 +1,5 @@
 <?php
-require_once('app/models/classesEloquent.php');
+require_once('classesEloquent.php');
 
 class Model_Reg extends Model {
 	public function __construct() {
@@ -17,7 +17,7 @@ class Model_Reg extends Model {
 				    'login' => $_POST['login'],
 				    'email' => $_POST['email'],
 				    'password' => $_POST['password'],
-				   	'password2' => $_POST['password2'],
+				    'passwordCheck' => $_POST['passwordCheck'],
 				    'ip' => $this->getIp()
 				];
 
@@ -25,12 +25,16 @@ class Model_Reg extends Model {
 				    'login' => 'required|alpha_numeric',
 				    'email' => 'required|valid_email',
 				    'password' => 'required|alpha_numeric|max_len,20|min_len,6',
-				    'password2' => 'required|alpha_numeric|max_len,20|min_len,6',
+				    'passwordCheck' => 'required|alpha_numeric|max_len,20|min_len,6',
 				    'ip' => 'valid_ip'
 				]);
 
 				if ($result == 1) {
-					if ($_POST['password'] == $_POST['password2']) {
+					$user = User::where('login', $_POST['login'])->first();
+
+					if ($user) {
+						$errors[] = 'Такой пользователь уже существует!';
+					} elseif ($_POST['password'] == $_POST['passwordCheck']) {
 						$ip = $this->getIp();
 						
 						$user = new User;
@@ -40,14 +44,14 @@ class Model_Reg extends Model {
 						$user->ip = $ip;
 						$answer = $user->save();
 
-						if ($answer) {
-							$errors[] = 'Данные успешно сохранены в базу данных!';
+						if (!$answer) {
+							$errors[] = 'При сохранении в базу данных произошла ошибка!';
 						}
 
 						$this->sendMail($_POST['email']);
-						
+						header('Location: http://php0217/07/list');
 					} else {
-						echo 'Пароли должны совпадать!';
+						$errors[] = 'Пароли должны совпадать!';
 					}
 				} else {
 					foreach ($result as $item) {
@@ -55,7 +59,7 @@ class Model_Reg extends Model {
 					}
 				}
 			} else {
-				echo 'Вы таки робот!!!';
+				$errors[] = 'Вы таки робот!!!';
 			}
 
 			$data['errors'] = $errors;

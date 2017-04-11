@@ -14,9 +14,9 @@ class Controller_Reg extends Controller {
     	
     	$login = $data['login'];
     	$errors = $data['errors'];
-
+       
         $this->view->generate('regist_view.twig', array(
-        	'uri' => 'main',
+        	'uri' => 'reg',
         	'errors' => $errors,
         	'login' => $login
         ));

@@ -29,7 +29,7 @@ class Model_Main extends Model {
                 	$_SESSION['userId'] = $userData['id'];
                 	$_SESSION['userLogin'] = $login;
                 	
-                    header('Location: http://php0217/05/5.2/list');
+                    header('Location: http://php0217/07/list');
                 } elseif (empty($userData)) {
                 	$errors[] = 'Вы ввели неправильный логин!';
                 } else {
