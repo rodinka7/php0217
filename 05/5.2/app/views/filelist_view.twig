@@ -9,11 +9,11 @@
       <th>Фотография</th>
       <th>Действия</th>
     </tr>
-    {% for photo in photos %}
+    {% for image in images %}
           <tr>
-          <td>{{photo}}</td>
-          <td><img src="app/img/{{photo}}" alt=""></td>
-          <td><a href="?filelist?delete?{{photo}}">Удалить аватарку пользователя</a></td>
+          <td>{{image}}</td>
+          <td><img src="app/img/{{image}}" alt=""></td>
+          <td><a href="filelist/delete/?img={{image}}">Удалить аватарку пользователя</a></td>
           </tr>   
     {% endfor %}  
   </table>

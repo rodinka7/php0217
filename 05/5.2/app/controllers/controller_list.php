@@ -17,13 +17,18 @@ class Controller_List extends Controller {
   
 	    	$users = $data['users'];
 	    	$errors = $data['errors'];
-
+            
         	$this->view->generate('list_view.twig', array(
         		'users' => $users,
         		'uri' => 'list',
         		'errors' => $errors
         	));
     	}
+    }
+
+    public function action_delete(){
+        $this->model->deleteUser();
+        header('Location: http://php0217/05/5.2/list');
     }		
 }
 

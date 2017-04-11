@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Запретная зона, доступ только авторизированному пользователю</h1>
 	<h2>Информация выводится из базы данных</h2>
-	<form action="?sort?receive" method="POST" enctype="multipart/form-data">
+	<form action="" method="POST" enctype="multipart/form-data">
 		<table class="table table-bordered">
 			<tr>
 				<th>Логин пользователя</th>
@@ -12,14 +12,14 @@
 			</tr>
 			<tr>
 				<td>				   
-					<input type="text" class="form-control" name="inputEmail3" placeholder="Введите логин">   
+					<input type="text" class="form-control" name="login" placeholder="Введите логин">   
 				</td>
 				<td>
 					<button type="submit" class="btn btn-default">Показать загруженные файлы</button>			
 				</td>
 				<td>
-					{% if file %}
-						{{file.login}} загрузил {{file.photo}} файл
+					{% if file.image %}
+						{{file.login}} загрузил {{file.image}} файл
 					{% else %}
 						У пользователя нет файлов!
 					{% endif %} 

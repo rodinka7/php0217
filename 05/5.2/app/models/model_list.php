@@ -1,6 +1,7 @@
 <?php
 
 class Model_List extends Model {
+	public $data;
 
     public function __construct(){
         parent::__construct();
@@ -18,7 +19,6 @@ class Model_List extends Model {
 
     public function get_data() {
     	$errors;
-    	$data;
 
     	session_start();
 
@@ -64,46 +64,43 @@ class Model_List extends Model {
 		        }
 			}		
 			
-			$data['errors'] = $errors;
+			$this->data['errors'] = $errors;
     	} else {
     		$sql = 'SELECT * from `users`';
 			$result = $this->connection->query($sql);
 			$users = $result->fetch_all(MYSQLI_ASSOC);	
 
-			$data['users'] = $users;
+			$this->data['users'] = $users;
     	}
 
-    	return $data;
+    	return $this->data;
     }
 
-    public function action_delete() {
- 		$sql = 'SELECT from users WHERE (id ='.$_GET['id'].')';
- 		$result = $this->connection->query($sql);
+    public function deleteUser() {
+    	$userId = $_GET['id'];
+    	
+ 		$sql = "SELECT image FROM users WHERE id = $userId";
+ 		$result = $this->connection->query($sql); 	
+ 		$userImage = $result->fetch_assoc();
 
+ 		$img = $userImage['image'];
 
- 		$img = $result['image'];
- 		
+ 		$images = scandir('app/img/');
+		 		
+ 		foreach ($images as $image) {
+ 			if ($image == $img) {
+ 				unlink('app/img/'.$img);
+ 			}
+ 		}	
 
- 		$sql = 'delete from users where (id ='.$_GET['id'].')';
+ 		$sql = 'delete from users where (id ='.$userId.')';
  		$result = $this->connection->query($sql);
 
  		if ($result) {
  			$errors[] = 'Пользователь был успешно удален!';
  		}
-		 		/*$img = $user['photo'];
-		 		
-		 		$files = scandir('app/img/');
-		 		
-		 		foreach ($files as $file) {
-		 			if ($file == $img) {
-		 				unlink('app/img/'.$img);
-		 			}
-		 		}
-		 		if ($result) {
-		 			echo 'Пользователь был успешно удален!';
-		 		}*/
-			
-		
+
+ 		$this->data['errors'] = $errors;
     }
 }
 ?>
