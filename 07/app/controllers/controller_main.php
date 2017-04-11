@@ -1,6 +1,6 @@
 <?php
 
-class Controller_main extends Controller {
+class Controller_Main extends Controller {
 	
 	public function __construct(){
 		parent::__construct();
@@ -9,34 +9,23 @@ class Controller_main extends Controller {
 	}
 
     public function action_main() {
+    	$data = $this->model->get_data();
+    	
+    	$login = $data['login'];
+    	$errors = $data['errors'];
+
         $this->view->generate('main_view.twig', array(
-        	'uri' => 'main'
+        	'uri' => 'main',
+        	'errors' => $errors,
+        	'login' => $login
         ));
     }
 
-    public function action_login() {
-    	session_start();
-		
-		$users = $this->model->get_data();
-		
-		if (!empty($_POST['inputEmail3']) && !empty($_POST['inputPassword3'])) {
+    public function action_exit(){
+    	$_SESSION['userId'] = '';
+    	$_SESSION['userLogin'] = '';
 
-			$login = $_POST['inputEmail3'];
-			$pass = $_POST['inputPassword3'];
-
-			foreach ($users as $user) {
-				if (($user['login'] == $login) && ($user['password'] != crypt($pass, 'happy'))) {
-					echo 'Вы ввели неверный пароль!';
-					break;
-				} elseif (($user['login'] == $login) && ($user['password'] == crypt($pass,'happy'))) {
-					$_SESSION['user'] = $user['id'];
-					
-					header('Location: http://php0217/05/5.2/?list');
-				}
-			}	
-		} else {
-			echo 'Поля формы должны быть заполнены!';
-		}
+    	header('Location: http://php0217/05/5.2/');
     }
 }
 

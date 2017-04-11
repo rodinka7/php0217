@@ -1,6 +1,6 @@
 <?php
 
-class Controller_reg extends Controller {
+class Controller_Reg extends Controller {
 
 	public function __construct(){
 		parent::__construct();
