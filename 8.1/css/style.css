@@ -1,0 +1,27 @@
+.form {
+	width: 40%;
+}
+
+.input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+
+	border-radius: 10px;
+	border: none;
+	border: 1px solid #a0a0a0;
+}
+
+.btn, .btnReceive {
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+.table {
+	border-collapse: collapse;
+}
+
+td {
+	border: 1px solid #a0a0a0;
+	padding: 10px;
+}
