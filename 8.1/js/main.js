@@ -38,7 +38,9 @@ btn.addEventListener('click', function(e){
 
 		p.then(function(res) {
 			var result = res;
-			console.log(result);
+			
+			alert(result);
+			form.reset();
 		})
 	} 
 })
