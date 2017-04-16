@@ -2,33 +2,21 @@
 require_once('config.php');
 
 $good = new Good();
-$newCategory = new Category();
 
 $good->name = $_POST['name'];
 $good->art = $_POST['art'];
 $good->producer = $_POST['producer'];
 $good->count = $_POST['count'];
 $good->price = $_POST['price'];
-$good->category = $_POST['category'];
+
+$category = Category::where('name', $_POST['category'])->first();
+
+if ($category) {
+    $good->category_id = $category->id;
+}
 $good->save();
 
 $goods = Good::all();
-$categories = Category::all();
-
-$result = findCategory($categories);
-
-function findCategory($categories) {
-	foreach ($categories as $category) {
-		if ($_POST['category'] == $category['category']) {
-			return true;
-		}
-	}
-}
-
-if (!$result) {
-	$newCategory->category = $_POST['category'];
-	$newCategory->save();
-}
 ?>
 
 <h2><a href="index.php">На главную</a></h2>
@@ -51,7 +39,7 @@ if (!$result) {
             <td><a href="show.php?id=<?= $good->id; ?>"><?=$good->producer?></a></td>
 			<td><a href="show.php?id=<?= $good->id; ?>"><?=$good->count?></a></td>
 			<td><a href="show.php?id=<?= $good->id; ?>"><?=$good->price?></a></td>
-			<td><a href="show.php?id=<?= $good->id; ?>"><?=$good->category?></a></td>
+			<td><a href="show.php?id=<?= $good->id; ?>"><?=$good->category->name?></a></td>
         </tr>
     <?php endforeach; ?>
 </table>

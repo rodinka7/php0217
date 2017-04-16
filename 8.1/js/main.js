@@ -21,7 +21,7 @@ btn.addEventListener('click', function(e){
 			var xhr = new XMLHttpRequest(),
 				body = JSON.stringify(data);
 			
-			xhr.open('POST', 'rest.php');
+			xhr.open('POST', 'rest.php?id=' + 3);
 
 			xhr.send(body);
 
@@ -75,8 +75,7 @@ btnReceive.addEventListener('click', function(e){
 			var tr = document.createElement('tr');
 
 			tr.innerHTML = `<td>${item['name']}</td><td>${item['art']}</td></tr>
-			<td>${item['producer']}</td><td>${item['count']} шт.</td><td>${item['price']} долл.</td>
-			<td>${item['category']}</td>`;
+			<td>${item['producer']}</td><td>${item['count']} шт.</td><td>${item['price']} долл.</td>`;
 
 			table.appendChild(tr);
 		}
