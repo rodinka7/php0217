@@ -75,7 +75,7 @@ btnReceive.addEventListener('click', function(e){
 			var tr = document.createElement('tr');
 
 			tr.innerHTML = `<td>${item['name']}</td><td>${item['art']}</td></tr>
-			<td>${item['producer']}</td><td>${item['count']} шт.</td><td>${item['price']} долл.</td>`;
+			<td>${item['producer']}</td><td>${item['count']} шт.</td><td>${item['price']} долл.</td><td>${item['category']['name']}</td>`;
 
 			table.appendChild(tr);
 		}

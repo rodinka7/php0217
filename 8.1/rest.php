@@ -1,10 +1,8 @@
 <?php
 require_once('config.php');
 
-$newCategory = new Category(); 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $goods = Good::all();
+    $goods = Good::with('category')->get();
     echo $goods->toJson();
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
