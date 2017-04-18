@@ -1,0 +1,21 @@
+.container {
+	width: 50%;
+	margin: auto;
+	padding: 5%;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	
+	transform: translate(-50%, -50%);
+
+	border: 1px solid #a0a0a0;
+	border-radius: 10px;
+
+	font: 28px Arial;
+}
+
+.input {
+	margin-top: 20px;
+	display: block;
+}

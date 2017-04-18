@@ -1,8 +1,8 @@
 <?php
 class VkApi
 {
-    public $myID  = '5986992';
-    public $token = '074df39e1f67e2b03dd67aa8489e0a3c79d9c9c2723cf9b5ff1bf1a7adfcf0c99579c4a7f3188f22220f1';
+    public $myID  = '5989444';
+    public $token = 'a4f3591af5f29c4d52a6eeb5d1bc51cf1c2b6c92cfd4c415c5948d30ff78c1e25eb32a3385858df3be97f';
 
     public $responseJson;
     public $requestDowl;
@@ -16,14 +16,15 @@ class VkApi
     //метод для загрузки картики на сервер VK
     public function downloadServer($link, $nameFile)
     {
-        $cfile = curl_file_create($nameFile, 'image/jpeg', $nameFile);
-        print_r($cfile);
         $curl = curl_init();
+
+        $cfile = curl_file_create($nameFile, 'image/jpeg', $nameFile);
+
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL            => $link,
             CURLOPT_POST           => 1,
-            CURLOPT_POSTFIELDS     => array("image" => $cfile)
+            CURLOPT_POSTFIELDS     => ['photo' => $cfile]
         ));
         
         $this->requestDowl = json_decode(curl_exec($curl));
