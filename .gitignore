@@ -1,6 +1,9 @@
 .phpintel
 .idea
 /05/5.2/app/vendor
-/9.WP
-!/9.WP/wp-content/themes/turistik
-!/9.WP/wp-content/plugins
+/9.WP/wp-admin
+/9.WP/wp-includes
+/9.WP/*php
+/9.WP/wp-content/languages
+/9.WP/wp-content/uploads
+/9.WP/wp-content/themes
