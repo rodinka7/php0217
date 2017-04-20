@@ -18,6 +18,17 @@
               <div class="logo-wrap"><a href="/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.svg" alt="Логотип" class="logo-wrap__logo-img"></a></div>
             </div>
             <nav class="main-navigation">
+              <?php wp_nav_menu([
+                  'menu'            => 'menu',              // (string) Название выводимого меню (указывается в админке при создании меню, приоритетнее 
+                                      // чем указанное местоположение theme_location - если указано, то параметр theme_location игнорируется)
+                  'container'       => false,           // (string) Контейнер меню. Обворачиватель ul. Указывается тег контейнера (по умолчанию в тег div)
+                  'menu_class'      => 'nav-list',          // (string) class самого меню (ul тега)
+                  'echo'            => true,            // (boolean) Выводить на экран или возвращать для обработки
+                  'depth'           => 0,               // (integer) Глубина вложенности (0 - неограничена, 2 - двухуровневое меню)
+                  'walker'          => '',              // (object) Класс собирающий меню. Default: new Walker_Nav_Menu
+                  'theme_location'  => ''               // (string) Расположение меню в шаблоне. (указывается ключ которым было зарегистрировано меню в функции register_nav_menus)
+                ]); 
+              ?>
               <ul class="nav-list">
                 <li class="nav-list__nav-item"><a href="#" class="nav-list__nav-item__nav-link">Главная</a></li>
                 <li class="nav-list__nav-item"><a href="#" class="nav-list__nav-item__nav-link">Полезная информация</a></li>
