@@ -13,14 +13,14 @@
             $prevPost = get_previous_post();
             if ($prevPost) :
           ?>
-             <div class="page-navigation-wrap"><a href="<?php the_permalink(); ?>" class="page-navigation__prev-page"><i class="icon icon-angle-double-left"></i>Предыдущая статья</a></div>
+             <div class="page-navigation-wrap"><a href="<?php echo get_permalink($prevPost->catID); ?>" class="page-navigation__prev-page"><i class="icon icon-angle-double-left"></i>Предыдущая статья</a></div>
           <?php endif; ?>
 
           <?php 
             $nextPost = get_next_post();
             if ($nextPost) :
           ?>
-              <div class="page-navigation-wrap"><a href="<?php the_permalink(); ?>" class="page-navigation__next-page">Сдедующая статья<i class="icon icon-angle-double-right"></i></a></div>
+              <div class="page-navigation-wrap"><a href="<?php echo get_permalink($nextPost->catID); ?>" class="page-navigation__next-page">Сдедующая статья<i class="icon icon-angle-double-right"></i></a></div>
           <?php endif; ?>
         </div>
 

@@ -15,7 +15,7 @@
         <div class="top-header">
           <div class="top-header__wrap">
             <div class="logotype-block">
-              <div class="logo-wrap"><a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.svg" alt="Логотип" class="logo-wrap__logo-img"></a></div>
+              <div class="logo-wrap"><a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_theme_mod('img-upload') ? get_theme_mod('img-upload') : get_stylesheet_directory_uri().'/img/logo.svg'; ?>" alt="Логотип" class="logo-wrap__logo-img"></a></div>
             </div>
             <nav class="main-navigation">
               <?php  
@@ -30,10 +30,9 @@
         </div>
         <div class="bottom-header">
           <div class="search-form-wrap">
-            <form class="search-form">
-              <input type="text" placeholder="Поиск..." class="search-form__input">
-              <button class="search-form__btn-search"><i class="icon icon-search"></i></button>
-            </form>
+            <?php
+              get_search_form(); 
+            ?>
           </div>
         </div>
       </header>

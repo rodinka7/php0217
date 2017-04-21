@@ -22,13 +22,24 @@
 		                </div>
       		      </div>
       				<?php endwhile; ?>
-      				<?php endif; ?>
-            	
-            </div>
 
-            <div class="pagenavi-post-wrap">
-            
-            <a href="#" class="pagenavi-post__prev-postlink"><i class="icon icon-angle-double-left"></i></a><span class="pagenavi-post__current">1</span><a href="#" class="pagenavi-post__page">2</a><a href="#" class="pagenavi-post__page">3</a><a href="#" class="pagenavi-post__page">...</a><a href="#" class="pagenavi-post__page">10</a><a href="#" class="pagenavi-post__next-postlink"><i class="icon icon-angle-double-right"></i></a>
+              <div class="pagenavi-post-wrap">
+             
+              <?php 
+                the_posts_pagination([
+                   'prev_next' => true,
+                   'mid_size' => 1,
+                   'before_page_number' => '',
+                   'after_page_number' => '',
+                   'prev_text' => __('<<'),
+                   'next_text' => __( '>>' ),
+                   'screen_reader_text' => __( '' ),
+                ]);
+              ?>
+              </div>
+        			
+              <?php endif; ?>
+            	
             </div>
           
           </div>

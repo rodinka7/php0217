@@ -594,7 +594,7 @@ li {
 .pagenavi-post-wrap {
   padding: 10px 0; }
 
-.pagenavi-post__prev-postlink, .pagenavi-post__page, .pagenavi-post__next-postlink {
+.prev.page-numbers, .page-numbers, .next.page-numbers {
   font-size: 1rem;
   font-family: "Lato", sans-serif;
   line-height: 1.2rem;
@@ -606,11 +606,11 @@ li {
   letter-spacing: 1px;
   -webkit-border-radius: 1px;
           border-radius: 1px; }
-  .pagenavi-post__prev-postlink:hover, .pagenavi-post__page:hover, .pagenavi-post__next-postlink:hover {
+  .prev.page-numbers:hover, .page-numbers:hover, .next.page-numbers:hover {
     color: #ffffff;
     background: #0097a7; }
 
-.pagenavi-post__current {
+.page-numbers.current {
   font-size: 1rem;
   font-family: "Lato", sans-serif;
   line-height: 1.143rem;

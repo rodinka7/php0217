@@ -10,7 +10,7 @@
           ?> 
           </div>
           <div class="copyright-wrap">
-            <div class="copyright-text">Туристик<a href="#" class="copyright-text__link"> loftschool 2016</a></div>
+            <div class="copyright-text">Туристик<a href="<?php echo get_home_url(); ?>" class="copyright-text__link"> loftschool 2016</a></div>
           </div>
         </div>
       </footer>

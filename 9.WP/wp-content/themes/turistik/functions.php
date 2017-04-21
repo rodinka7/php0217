@@ -1,10 +1,7 @@
 <?php
 add_theme_support('customize_register');
 
-register_nav_menus([
-	'top' => 'верхнее меню',
-	'bottom' => 'нижнее меню'
-]);
+add_theme_support('menus');
 
 function get_thumbnail(){
 	$thumbnail = get_the_post_thumbnail_url();
@@ -52,13 +49,42 @@ class Walker_Quickstart_Menu_Bottom extends Walker {
 
 }
 
-function mytheme_customize_register( $wp_customize ) {
-    $wp_customize->add_setting( 'header_textcolor' , array(
-        'default'   => '#000000',
-        'transport' => 'refresh',
-    ) );
-}
-add_action( 'customize_register', 'mytheme_customize_register' );
+function hwl_home_pagesize( $query ) {
+    if ( is_admin() || ! $query->is_main_query() )
+        return;
 
+    if ( is_home() ) {
+        $query->set( 'posts_per_page', 5 );
+        return;
+    }
+}
+
+add_action( 'pre_get_posts', 'hwl_home_pagesize' );
+
+function mytheme_customize_register( $wp_customize ) {
+    $wp_customize->add_section(
+        'section_logo', array(
+        'title' => 'Изменить логотип',
+        'description' => 'Изменение картинки в логотипе',
+        'priority' => 11
+        )
+    );
+
+    $wp_customize->add_setting( 'img-upload' );
+ 
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control(
+            $wp_customize,
+            'img-upload',
+            array(
+                'label' => 'Загрузка изображения',
+                'section' => 'section_logo',
+                'settings' => 'img-upload'
+            )
+        )
+    );
+}
+
+add_action( 'customize_register', 'mytheme_customize_register' );
 
 ?>
