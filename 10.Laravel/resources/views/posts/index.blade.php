@@ -10,9 +10,21 @@
               		<a href="/posts/create" class="btn">Создать пост</a>
               	</div>
                 <div class="panel-body">
+                  <table class="table">
                     @foreach ($posts as $post)
-						<li>{{ $post->title }}</li>
+                      <tr>
+                        <td>{{ $post->title }}</td>
+                        <td><a href="/posts/edit/{{$post->id}}" class="btn">Редактировать пост</a></td>
+                        <td>
+                          <form action="/posts/delete/{{$post->id}}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <input type="submit" class="btn" value="Удалить пост"/>
+                          </form>
+                        </td>
+                      </tr>
                     @endforeach
+                  </table>
                 </div>
             </div>
         </div>
