@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', 'GoodController@index');
 
 Auth::routes();
 
@@ -24,4 +26,6 @@ Route::post('/posts/store', 'PostController@store');
 Route::get('/posts/edit/{id}', 'PostController@edit');
 Route::post('/posts/update/{id}', 'PostController@update');
 Route::delete('/posts/delete/{id}', 'PostController@delete');
+
+Route::get('/orderlist', 'OrderController@index');
 
