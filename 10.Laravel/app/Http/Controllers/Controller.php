@@ -10,4 +10,15 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public $data;
+
+    public function __construct(){
+    	$posts = \App\Post::all();
+    	$categories = \App\Category::all();
+    	$random_good = \App\Good::find(rand(31,40));
+
+    	$this->data['posts'] = $posts;
+    	$this->data['categories'] = $categories;
+    	$this->data['random_good'] = $random_good;
+    }
 }

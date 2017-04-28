@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategoriesSeed extends Seeder
+class PostsSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,12 +12,13 @@ class CategoriesSeed extends Seeder
     public function run()
     {
         for ($i = 0; $i < 5; $i++) {
-        	$category = new \App\Category();
+        	$post = new \App\Post();
         	$faker = \Faker\Factory::create();
 
-		    $category->name = $faker->name;
-		    $category->description = $faker->realText($maxNbChars = 150, $indexSize = 2);
-		    $category->save();
+		    $post->name = $faker->name;
+		    $post->description = $faker->text;
+		    $post->image = $faker->image('public/img/news', 640, 480, 'cats', false);
+		    $post->save();
         }
     }
 }

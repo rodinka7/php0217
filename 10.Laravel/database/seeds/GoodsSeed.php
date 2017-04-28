@@ -16,13 +16,11 @@ class GoodsSeed extends Seeder
         	$good = new \App\Good();
         	$faker = \Faker\Factory::create();
 
-		    $good->integer('category_id')->unsigned();
-		    $good->foreign('category_id')->references('id')->on('categories');
+		    $good->category_id = rand(1,5);
 		    $good->name = $faker->name;
-		    $good->art = $faker->numberBetween($min = 10000, $max = 90000);
-		    $good->producer = $faker->producer;
-		    $good->count = $faker->numberBetween($min = 5, $max = 20);
-		    $good->price = numberBetween($min = 300, $max = 2000);
+		    $good->description = $faker->realText($maxNbChars = 150, $indexSize = 2);
+		    $good->image = $faker->image('public/img/cover', 640, 480, 'cats', false);
+		    $good->price = rand(150,1500);
 		    $good->save();
         }
     }

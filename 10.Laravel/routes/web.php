@@ -16,6 +16,8 @@
 });*/
 
 Route::get('/', 'GoodController@index');
+Route::get('category/{id}', 'CategoryController@index');
+Route::get('good/{id}', 'GoodController@show');
 
 Auth::routes();
 
@@ -28,4 +30,6 @@ Route::post('/posts/update/{id}', 'PostController@update');
 Route::delete('/posts/delete/{id}', 'PostController@delete');
 
 Route::get('/orderlist', 'OrderController@index');
+
+
 
