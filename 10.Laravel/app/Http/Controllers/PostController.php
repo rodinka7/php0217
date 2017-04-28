@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Post;
 
 class PostController extends Controller
 {
     public function index() {
-    	$data['posts'] = Post::all();
+    	$this->data['posts'] = \App\Post::all();
 
-    	return view('posts.index', $data);
+    	return view('posts', $this->data);
     }
 
-    public function create() {
+    public function show ($post_id){
+        try {
+            $post = \App\Post::findOrFail($post_id);
+        } catch (Exception $e) {
+            return abort(404);
+        }
+
+        $this->data['post'] = $post;
+
+        return view('post', $this->data); 
+        
+    }
+
+    /*public function create() {
     	return view('posts.create');
     }
 
@@ -73,5 +85,5 @@ class PostController extends Controller
         };
 
         return redirect('/posts/');
-    }
+    }*/
 }

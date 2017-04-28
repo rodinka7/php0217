@@ -23,8 +23,8 @@
       <div class="products-columns">
       @foreach ($goods as $good)
         <div class="products-columns__item">
-          <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">{{ $good->name }}</a></div>
-          <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/{{ $good->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+          <div class="products-columns__item__title-product"><a href="/good/{{ $good->id }}" class="products-columns__item__title-product__link">{{ $good->name }}</a></div>
+          <div class="products-columns__item__thumbnail"><a href="/good/{{ $good->id }}" class="products-columns__item__thumbnail__link"><img src="img/cover/{{ $good->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
           <div class="products-columns__item__description"><span class="products-price">{{ $good->price }} руб</span><a href="#" class="btn btn-blue">Купить</a></div>
         </div>
       @endforeach  

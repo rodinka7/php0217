@@ -16,20 +16,22 @@
 });*/
 
 Route::get('/', 'GoodController@index');
-Route::get('category/{id}', 'CategoryController@index');
-Route::get('good/{id}', 'GoodController@show');
+Route::get('/category/{id}', 'CategoryController@index');
+Route::get('/good/{id}', 'GoodController@show');
+Route::get('/posts', 'PostController@index');
+Route::get('/posts/{id}', 'PostController@show');
+Route::get('/about', 'AboutController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/posts', 'PostController@index');
+/*Route::get('/home', 'HomeController@index');
 Route::get('/posts/create', 'PostController@create');
 Route::post('/posts/store', 'PostController@store');
 Route::get('/posts/edit/{id}', 'PostController@edit');
 Route::post('/posts/update/{id}', 'PostController@update');
 Route::delete('/posts/delete/{id}', 'PostController@delete');
 
-Route::get('/orderlist', 'OrderController@index');
+Route::get('/orderlist', 'OrderController@index');*/
 
 
 

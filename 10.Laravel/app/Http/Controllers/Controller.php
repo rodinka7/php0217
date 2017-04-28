@@ -15,8 +15,13 @@ class Controller extends BaseController
     public function __construct(){
     	$posts = \App\Post::all();
     	$categories = \App\Category::all();
-    	$random_good = \App\Good::find(rand(31,40));
+    	$random_good = \App\Good::find(rand(2,8));
 
+        for ($i = 0; $i < 3; $i++) {
+            $random_goods[] = \App\Good::find(rand(2,8));
+        }
+
+        $this->data['random_goods'] = $random_goods;
     	$this->data['posts'] = $posts;
     	$this->data['categories'] = $categories;
     	$this->data['random_good'] = $random_good;

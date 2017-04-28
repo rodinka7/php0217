@@ -1120,3 +1120,9 @@ a img.aligncenter {
   width: 130%;
   background-color: #d0e26c;
   z-index: -5; }
+
+.clearfix:after{
+  display: block;
+  content: '';
+  clear: both;
+}

@@ -45,7 +45,7 @@
           <ul class="nav-list">
             <li class="nav-list__item"><a href="/" class="nav-list__item__link">Главная</a></li>
             <li class="nav-list__item"><a href="/orderlist" class="nav-list__item__link">Мои заказы</a></li>
-            <li class="nav-list__item"><a href="/news" class="nav-list__item__link">Новости</a></li>
+            <li class="nav-list__item"><a href="/posts" class="nav-list__item__link">Новости</a></li>
             <li class="nav-list__item"><a href="/about" class="nav-list__item__link">О компании</a></li>
           </ul>
         </nav>

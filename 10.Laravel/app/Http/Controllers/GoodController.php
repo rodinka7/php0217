@@ -25,6 +25,7 @@ class GoodController extends Controller
 
     	$this->data['good'] = $good;
 
+
     	return view('good', $this->data);
     }
 }

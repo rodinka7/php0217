@@ -1,15 +1,14 @@
 @extends('layouts.master')
-
-@section('title', $good->name)
+@section('title', $post->name)
 @section('content')
 <div class="content-top">
     <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
-    <div class="image-container"><img src="/img/slider.png" alt="Image" class="image-main"></div>
+    <div class="slider"><img src="/img/slider.png" alt="Image" class="image-main"></div>
   </div>
-  <div class="content-middle">
+  <div class="content-middle clearfix">
     <div class="content-head__container">
       <div class="content-head__title-wrap">
-        <div class="content-head__title-wrap__title bcg-title">{{ $good->name }}</div>
+        <div class="content-head__title-wrap__title bcg-title">Новости</div>
       </div>
       <div class="content-head__search-block">
         <div class="search-container">
@@ -21,25 +20,17 @@
       </div>
     </div>
     <div class="content-main__container">
-      <div class="product-container">
-        <div class="product-container__image-wrap"><img src="/img/cover/{{ $good->image }}" class="image-wrap__image-product"></div>
-        <div class="product-container__content-text">
-          <div class="product-container__content-text__title">{{ $good->name }}</div>
-          <div class="product-container__content-text__price">
-            <div class="product-container__content-text__price__value">
-              Цена: <b>{{ $good->price }}</b>
-              руб
-            </div><a href="#" class="btn btn-blue">Купить</a>
-          </div>
-          <div class="product-container__content-text__description">
-            <p>
-              {{ $good->description }}
-            </p>
-          </div>
-        </div>
+      <div class="news-block content-text">
+        <h3 class="content-text__title">
+          {{ $post->name }}
+        </h3><img src="/img/news/{{ $post->image }}" alt="Image" class="alignleft img-news">
+        <p>
+          {{ $post->description }}
+        </p>
       </div>
     </div>
   </div>
+
   <div class="content-bottom">
     <div class="line"></div>
     <div class="content-head__container">
@@ -49,7 +40,7 @@
     </div>
     <div class="content-main__container">
       <div class="products-columns">
-        @foreach ($random_goods as $oneGood)
+        @foreach ( $random_goods as $oneGood )
         <div class="products-columns__item">
           <div class="products-columns__item__title-product"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__title-product__link">{{ $oneGood->name }}</a></div>
           <div class="products-columns__item__thumbnail"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__thumbnail__link"><img src="/img/cover/{{ $oneGood->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
