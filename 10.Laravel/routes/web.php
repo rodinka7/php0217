@@ -21,6 +21,12 @@ Route::get('/good/{id}', 'GoodController@show');
 Route::get('/posts', 'PostController@index');
 Route::get('/posts/{id}', 'PostController@show');
 Route::get('/about', 'AboutController@index');
+Route::post('/search', 'GoodController@search');
+
+Route::get('/logout', 'homeController@logout');
+Route::get('/orders', 'OrderController@index');
+Route::post('/orders/show', 'OrderController@show');
+
 
 Auth::routes();
 

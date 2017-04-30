@@ -13,9 +13,10 @@
       </div>
       <div class="content-head__search-block">
         <div class="search-container">
-          <form class="search-container__form">
-            <input type="text" class="search-container__form__input">
-            <button class="search-container__form__btn">search</button>
+          <form class="search-container__form" method="POST" action="/search">
+             {{ csrf_field() }}
+            <input type="text" name="search" class="search-container__form__input">
+            <button class="search-container__form__btn" type="submit">search</button>
           </form>
         </div>
       </div>
@@ -26,21 +27,13 @@
         <div class="products-category__list__item">
           <div class="products-category__list__item__title-product"><a href="/good/{{ $good->id }}">{{ $good->name }}</a></div>
           <div class="products-category__list__item__thumbnail"><a href="/good/{{ $good->id }}" class="products-category__list__item__thumbnail__link"><img src="/img/cover/{{ $good->image }}" alt="Preview-image"></a></div>
-          <div class="products-category__list__item__description"><span class="products-price">{{ $good->price }} руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
+          <div class="products-category__list__item__description"><span class="products-price">{{ $good->price }} руб.</span><a href="/good/{{ $good->id }}" class="btn btn-blue">Купить</a></div>
         </div>
        @endforeach
       </div>
     </div>
     <div class="content-footer__container">
-      <ul class="page-nav">
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link"><i class="fa fa-angle-double-left"></i></a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link">1</a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link">2</a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link">3</a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link">4</a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link">5</a></li>
-        <li class="page-nav__item"><a href="#" class="page-nav__item__link"><i class="fa fa-angle-double-right"></i></a></li>
-      </ul>
+    {{ $goods->render() }}
     </div>
   </div>
   <div class="content-bottom"></div>

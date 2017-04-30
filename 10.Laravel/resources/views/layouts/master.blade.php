@@ -29,22 +29,13 @@
   </head>
   <body>
     <div class="main-wrapper">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ url('/login') }}">Login</a>
-                <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-    @endif
       <header class="main-header">
+       @if (Route::has('login'))
         <div class="logotype-container"><a href="#" class="logotype-link"><img src="/img/logo.png" alt="Логотип"></a></div>
         <nav class="main-navigation">
           <ul class="nav-list">
             <li class="nav-list__item"><a href="/" class="nav-list__item__link">Главная</a></li>
-            <li class="nav-list__item"><a href="/orderlist" class="nav-list__item__link">Мои заказы</a></li>
+            <li class="nav-list__item"><a href="/orders" class="nav-list__item__link">Мои заказы</a></li>
             <li class="nav-list__item"><a href="/posts" class="nav-list__item__link">Новости</a></li>
             <li class="nav-list__item"><a href="/about" class="nav-list__item__link">О компании</a></li>
           </ul>
@@ -53,14 +44,25 @@
           <div class="header-contact__phone"><a href="#" class="header-contact__phone-link">Телефон: 33-333-33</a></div>
         </div>
         <div class="header-container">
+          @if (Auth::check())
           <div class="payment-container">
             <div class="payment-basket__status">
-              <div class="payment-basket__status__icon-block"><a class="payment-basket__status__icon-block__link"><i class="fa fa-shopping-basket"></i></a></div>
-              <div class="payment-basket__status__basket"><span class="payment-basket__status__basket-value">0</span><span class="payment-basket__status__basket-value-descr">товаров</span></div>
+              <div class="payment-basket__status__icon-block"><a href="/orders" class="payment-basket__status__icon-block__link"><i class="fa fa-shopping-basket"></i></a></div>
+              <div class="payment-basket__status__basket">
+              <span class="payment-basket__status__basket-value">
+                {{ $count }}
+              </span><span class="payment-basket__status__basket-value-descr">товаров</span></div>
             </div>
           </div>
-          <div class="authorization-block"><a href="#" class="authorization-block__link">Регистрация</a><a href="#" class="authorization-block__link">Войти</a></div>
+          <div class="authorization-block"><a href="{{ url('/logout') }}" class="authorization-block__link">Выйти</a></div>
+          @else
+            <div class="authorization-block"><a href="{{ url('/register') }}" class="authorization-block__link">Регистрация</a><a href="{{ url('/login') }}" class="authorization-block__link">Войти</a></div>
+          @endif
+          @if (Auth::user())
+            <div class="authorization-block"><a href="/admin" class="authorization-block__link">Панель управления</a></div>  
+          @endif      
         </div>
+      @endif
       </header>
      <div class="middle">
         <div class="sidebar">
@@ -98,11 +100,11 @@
             <div class="random-product-container__head">Случайный товар</div>
             <div class="random-product-container__content">
               <div class="item-product">
-                <div class="item-product__title-product"><a href="#" class="item-product__title-product__link">{{ $random_good->name }}</a></div>
-                <div class="item-product__thumbnail"><a href="/goods/{{ $random_good->id }}" class="item-product__thumbnail__link"><img src="/img/cover/{{ $random_good->image }}" alt="Preview-image" class="item-product__thumbnail__link__img"></a></div>
+                <div class="item-product__title-product"><a href="/good/{{ $random_good->id }}" class="item-product__title-product__link">{{ $random_good->name }}</a></div>
+                <div class="item-product__thumbnail"><a href="/good/{{ $random_good->id }}" class="item-product__thumbnail__link"><img src="/img/cover/{{ $random_good->image }}" alt="Preview-image" class="item-product__thumbnail__link__img"></a></div>
                 <div class="item-product__description">
                   <div class="item-product__description__products-price"><span class="products-price">{{ $random_good->price }} руб</span></div>
-                  <div class="item-product__description__btn-block"><a href="#" class="btn btn-blue">Купить</a></div>
+                  <div class="item-product__description__btn-block"><a href="/good/{{ $random_good->id }}" class="btn btn-blue">Купить</a></div>
                 </div>
               </div>
             </div>
@@ -129,6 +131,6 @@
         </div>
       </footer>
     </div>
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

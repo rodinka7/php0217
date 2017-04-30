@@ -12,9 +12,10 @@
       </div>
       <div class="content-head__search-block">
         <div class="search-container">
-          <form class="search-container__form">
-            <input type="text" class="search-container__form__input">
-            <button class="search-container__form__btn">search</button>
+          <form class="search-container__form" method="POST" action="/search">
+           {{ csrf_field() }}
+            <input type="text" name="search" class="search-container__form__input">
+            <button class="search-container__form__btn" type="submit">search</button>
           </form>
         </div>
       </div>
@@ -44,7 +45,7 @@
         <div class="products-columns__item">
           <div class="products-columns__item__title-product"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__title-product__link">{{ $oneGood->name }}</a></div>
           <div class="products-columns__item__thumbnail"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__thumbnail__link"><img src="/img/cover/{{ $oneGood->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-          <div class="products-columns__item__description"><span class="products-price">{{ $oneGood->price }} руб</span><a href="#" class="btn btn-blue">Купить</a></div>
+          <div class="products-columns__item__description"><span class="products-price">{{ $oneGood->price }} руб</span><a href="/good/{{ $oneGood->id }}" class="btn btn-blue">Купить</a></div>
         </div>
         @endforeach
       </div>

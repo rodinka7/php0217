@@ -13,9 +13,9 @@
       </div>
       <div class="content-head__search-block">
         <div class="search-container">
-          <form class="search-container__form">
-            <input type="text" class="search-container__form__input">
-            <button class="search-container__form__btn">search</button>
+          <form class="search-container__form" method="POST" action="/search">
+            <input type="text" name="search" class="search-container__form__input">
+            <button class="search-container__form__btn" type="submit">search</button>
           </form>
         </div>
       </div>
@@ -29,7 +29,7 @@
             <div class="product-container__content-text__price__value">
               Цена: <b>{{ $good->price }}</b>
               руб
-            </div><a href="#" class="btn btn-blue">Купить</a>
+            </div><a href="" id="orderBtn" class="btn btn-blue">Купить</a>
           </div>
           <div class="product-container__content-text__description">
             <p>
@@ -53,10 +53,22 @@
         <div class="products-columns__item">
           <div class="products-columns__item__title-product"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__title-product__link">{{ $oneGood->name }}</a></div>
           <div class="products-columns__item__thumbnail"><a href="/good/{{ $oneGood->id }}" class="products-columns__item__thumbnail__link"><img src="/img/cover/{{ $oneGood->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-          <div class="products-columns__item__description"><span class="products-price">{{ $oneGood->price }} руб</span><a href="#" class="btn btn-blue">Купить</a></div>
+          <div class="products-columns__item__description"><span class="products-price">{{ $oneGood->price }} руб</span><a href="/good/{{ $oneGood->id }}" class="btn btn-blue">Купить</a></div>
         </div>
         @endforeach
       </div>
     </div>
   </div>
+<div id="formContainer" class="formContainer">
+  <form action="post" id="form">
+    {{csrf_field()}}
+    <input type="hidden" name="good_id" value="{{$good->id}}">
+    <input type="hidden" name="price" value="{{$good->price}}">
+    <input type="text" name="name" placeholder="Your name">
+    <input type="text" name="email" placeholder="Your email" value="@if (Auth::check()){{ Auth::user()->email }}@endif">
+    <input type="button" id="btnSubmit" class="btn btn-blue" value="Order">
+    <input type="button" id="btnClose" class="btn btn-blue" value="Close">
+  </form>
+  <div id="message"></div>
+</div>
 @endsection

@@ -8,7 +8,7 @@ class CategoryController extends Controller
 {
     public function index($category_id){
     	
-    	$goods = \App\Good::where('category_id', $category_id)->get();
+    	$goods = \App\Good::where('category_id', $category_id)->paginate(6);
     	$category = \App\Category::find($category_id);
     	$category_name = $category->name;
     	
