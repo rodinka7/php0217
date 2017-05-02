@@ -18,10 +18,10 @@ class GoodController extends Controller
     }
 
     public function show($good_id){
+
     	$good = Good::find($good_id)->first();
 
     	$this->data['good'] = $good;
-
 
     	return view('good', $this->data);
     }

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Queue;
-use \App\Mail\MyMail;
 use \App\Good;
 use \App\Order;
 
@@ -53,7 +50,16 @@ class OrderController extends Controller
     		$order->email = $request->input('email');
     		$order->save();
     		
-    		Mail::to('kus-kus7@yandex.ru')->queue(new MyMail($order));
+            $data = [
+                'user' => $request->input('name'),
+                'email' =>  $request->input('email'),
+                'good' => $request->input('good_id'),
+                'price' => $request->input('price')
+            ];
+
+    		Mail::send('emails.order', $data, function ($message) {
+              $message->to('kus-kus7@yandex.ru', 'Джон Смит')->subject('Новый заказ!');
+            });
 
     		echo 'Ваше сообщение успешно отправлено!';
     	}
