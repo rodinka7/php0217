@@ -36,7 +36,7 @@ class OrderController extends Controller
 		return view('orders', $this->data);
     }
 
-    public function show(Request $request){
+    public function store(Request $request){
     	
     	if (!Auth::check()) {
     		echo 'Авторизируйтесь, пожалуйста!';
@@ -63,5 +63,16 @@ class OrderController extends Controller
 
     		echo 'Ваше сообщение успешно отправлено!';
     	}
+    }
+
+    public function destroy($order_id) {
+        try {
+            $order = Order::where("good_id", "=", $order_id)->first();
+        } catch (Exception $e) {
+            return abort(404);
+        };
+        $order->delete();
+        
+        return redirect('/orders');
     }
 }

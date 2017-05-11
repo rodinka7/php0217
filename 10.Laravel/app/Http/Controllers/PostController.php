@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \App\Post;
 
 class PostController extends Controller
 {
     public function index() {
-    	$this->data['posts'] = \App\Post::all();
+    	$this->data['posts'] = Post::all();
 
     	return view('posts', $this->data);
     }
 
-    public function show ($post_id){
+    public function store($post_id){
         try {
-            $post = \App\Post::findOrFail($post_id);
+            $post = Post::findOrFail($post_id);
         } catch (Exception $e) {
             return abort(404);
         }
@@ -23,44 +24,30 @@ class PostController extends Controller
         $this->data['post'] = $post;
 
         return view('post', $this->data); 
-        
     }
 
-    /*public function create() {
-    	return view('posts.create');
+    public function storePosts(){
+        $this->data['posts'] = Post::all();
+
+        return view('admin.posts', $this->data);
     }
 
-    public function store(Request $request) {
-    	$this->validate($request, [
-    		'title' => 'required|min:5',
-            'content' => 'required|min:10'	
-    	]);
-
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->input('content');
-        $post->user_id = Auth::id();
-        $post->save();
-
-    	return redirect('/posts');
-    }
-
-    public function edit($post_id) {
+    public function storePost($post_id){
         try {
             $post = Post::findOrFail($post_id);
         } catch (Exception $e) {
             return abort(404);
-        };
+        }
 
-        $data['post'] = $post;
+        $this->data['post'] = $post;
 
-        return view('posts.edit', $data);
+        return view('admin.post', $this->data); 
     }
 
     public function update(Request $request, $post_id) {
         $this->validate($request, [
             'title' => 'required|min:5',
-            'content' => 'required|min:10'  
+            'description' => 'required|min:10'  
         ]);
 
         try {
@@ -69,21 +56,20 @@ class PostController extends Controller
             return abort(404);
         };
 
-        $post->title = $request->title;
-        $post->content = $request->input('content');
-        $post->user_id = Auth::id();
+        $post->name = $request->input('title');
+        $post->description = $request->input('description');
         $post->save();
 
-        return redirect('/posts/edit/'.$post_id);
+        return redirect('/admin/posts/'.$post_id);
     }
 
-    public function delete($post_id) {
+    public function destroy($post_id) {
         try {
             Post::destroy($post_id);
         } catch (Exception $e) {
             return abort(404);
         };
 
-        return redirect('/posts/');
-    }*/
+        return redirect('/admin/posts/');
+    }
 }

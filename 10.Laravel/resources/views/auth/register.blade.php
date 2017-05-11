@@ -64,7 +64,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Is admin?</label>
 
                             <div class="col-md-6">
-                                <input type="checkbox" name="is_admin" required>
+                                <input type="checkbox" name="is_admin">
                             </div>
                         </div>
 

@@ -31,6 +31,7 @@
           <div class="cart-product__item__cart-date__content">{{ $order['created_at'] }}</div>
         </div>
         <div class="cart-product__item__product-price"><span class="product-price__value">{{ $order['price'] }} рублей</span></div>
+        <div class="cart-product__item__cart-date"><span class="product-price__value"><a href="/orders/delete/{{ $order['id'] }}" class="btn btn-blue">Удалить</a></span></div>
       </div>
     @endforeach
       <div class="cart-product-list__result-item">
