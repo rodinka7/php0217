@@ -52,7 +52,12 @@ class GoodController extends Controller
     }
 
     public function create(){
-        return view('create.good', $this->data);
+        return view('admin.goods.create', $this->data);
+    }
+
+    public function updateGood(Request $request){
+        $good = new Good();
+        
     }
 
     public function update(Request $request, $good_id)

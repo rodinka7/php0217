@@ -33,8 +33,9 @@ Route::get('/admin', 'GoodController@admin');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	Route::get('/good/{id}', 'GoodController@storeGood');
 	Route::post('/good/{id}', 'GoodController@update');
-	Route::get('/good/create', 'GoodController@create');
 	Route::get('/good/delete/{id}', 'GoodController@destroy');
+	Route::get('/create/good', 'GoodController@create');
+	Route::post('/create/good', 'GoodController@updateGood');
 
 	Route::get('/posts', 'PostController@storePosts');
 	Route::get('/posts/{id}', 'PostController@storePost');

@@ -21,12 +21,12 @@ class Controller extends BaseController
     public function __construct(){
     	$posts = Post::all();
     	$categories = Category::all();
-    	$random_good = Good::find(rand(11,20));
+    	$random_good = Good::find(rand(2,8));
         $orders = Order::all();
         $count = 0;
 
         for ($i = 0; $i < 3; $i++) {
-            $random_goods[] = Good::find(rand(11,20));
+            $random_goods[] = Good::find(rand(2,8));
         }
 
         if (Auth::check()) {

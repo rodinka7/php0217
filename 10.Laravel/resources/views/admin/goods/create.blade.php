@@ -22,9 +22,9 @@
     </div>
     <div class="content-main__container">
       <div class="product-container">
-	        <div class="product-container__image-wrap"><img src="/img/cover/" class="image-wrap__image-product"></div>
+	        <div class="product-container__image-wrap"><input type="file" name="image"></div>
 	        <div class="product-container__content-text">
-      			<form class="edit-container__form" method="post" action="/admin/good/create">
+      			<form class="edit-container__form" method="post" action="/admin/create/good">
       			  {{ csrf_field() }}
 		          <div class="product-container__content-text__title"><input type="text" class="edit-container__form__input" name="title" placeholder="Введите название товара"></div>
 		          <div class="product-container__content-text__price">
@@ -34,7 +34,7 @@
 		            </div><button type="submit" class="btn btn-blue">Сохранить</button>
 		          </div>
 		          <div class="product-container__content-text__description">
-		            <textarea class="edit-container__form__textarea" name="description" placeholader="Описание товара"></textarea>
+		            <textarea class="edit-container__form__textarea" name="description">Описание товара</textarea>
 		          </div>
       			</form>
 	        </div>
