@@ -36,6 +36,7 @@
         </div>
       </div>
     @endforeach
+    <a href="/admin/create/post" class="btn btn-brown">Создать пост</a>
     </div>
   </div>
   <div class="content-bottom"></div>

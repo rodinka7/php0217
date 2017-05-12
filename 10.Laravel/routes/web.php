@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	Route::get('/posts/{id}', 'PostController@storePost');
 	Route::post('/posts/{id}', 'PostController@update');
 	Route::get('/posts/delete/{id}', 'PostController@destroy');
+	Route::get('/create/post', 'PostController@create');
 });
 
 

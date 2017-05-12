@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Http\Requests;
 use \App\Good;
 
 class GoodController extends Controller
@@ -56,7 +57,27 @@ class GoodController extends Controller
     }
 
     public function updateGood(Request $request){
+        
+        $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'price' => 'required|numeric'
+        ]);
+        
         $good = new Good();
+        $good->category_id = $request->input('category_id');
+        $good->name = $request->input('title');
+        $good->description = $request->input('description');
+        $good->price = $request->input('price');
+        $good->image = $request->file('image')->getClientOriginalName();
+        $good->save();
+
+        $file = $request->file('image');
+        $file->move(public_path() . '/img/cover',$request->file('image')->getClientOriginalName());
+
+        $this->data['good'] = $good;
+        
+        return view('admin.good', $this->data);
         
     }
 

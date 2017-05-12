@@ -1208,3 +1208,12 @@ a img.aligncenter {
 .edit-container__form_wrapper {
   margin-top: 10px;
 }
+.create-container__form {
+  width: 100%;
+}
+.product-container__create-wrap {
+  margin-bottom: 10px;
+}
+.product-container__create__description {
+  margin-top: 10px;
+}

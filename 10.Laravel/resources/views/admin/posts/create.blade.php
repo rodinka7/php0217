@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Создание товара')
+@section('title', 'Создание поста')
 @section('content')
 <div class="content-top">
     <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
