@@ -2,7 +2,7 @@
 @section('title', $post->name)
 @section('content')
 <div class="content-top">
-    <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
+    <div class="content-top__text">Панель управления</div>
     <div class="slider"><img src="/img/slider.png" alt="Image" class="image-main"></div>
   </div>
   <div class="content-middle clearfix">
@@ -22,9 +22,13 @@
     </div>
     <div class="content-main__container">
       <div class="news-block content-text">
-        <form class="edit-container__form" method="post" action="/admin/posts/{{ $post->id }}">
+        <form class="edit-container__form" method="post" action="/admin/posts/{{ $post->id }}" enctype="multipart/form-data">
           {{ csrf_field() }}
-          <img src="/img/news/{{ $post->image }}" alt="Image" class="alignleft img-news">
+          <div class="product-container__image-wrap">
+            <img src="/img/news/{{ $post->image }}" alt="Image" class="alignleft img-news">
+            Изменить изображение:
+            <input type="file" name="image">
+          </div>
            <div class="edit-container__form_container">
              <input type="text" class="edit-container__form__input" name="title" value="{{ $post->name }}">
              <div class="edit-container__form_wrapper">

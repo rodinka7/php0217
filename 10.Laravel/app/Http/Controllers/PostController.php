@@ -44,6 +44,10 @@ class PostController extends Controller
         return view('admin.post', $this->data); 
     }
 
+    public function create(){
+        return view('admin.posts.create', $this->data);
+    }
+
     public function update(Request $request, $post_id) {
         $this->validate($request, [
             'title' => 'required|min:5',
@@ -58,9 +62,41 @@ class PostController extends Controller
 
         $post->name = $request->input('title');
         $post->description = $request->input('description');
+        
+        if (!empty($request->file('image'))) {
+            $post->image = $request->file('image')->getClientOriginalName();
+
+            $file = $request->file('image');
+            $file->move(public_path() . '/img/news',$request->file('image')->getClientOriginalName());
+        }
+
         $post->save();
 
         return redirect('/admin/posts/'.$post_id);
+    }
+
+    public function updatePost(Request $request){
+        
+        $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+        ]);
+        
+        $post = new Post();
+        $post->name = $request->input('title');
+        $post->description = $request->input('description');
+        
+        if (!empty($request->file('image'))) {
+            $post->image = $request->file('image')->getClientOriginalName();
+            $file = $request->file('image');
+            $file->move(public_path() . '/img/news',$request->file('image')->getClientOriginalName());
+        }
+        
+        $post->save();
+
+        $this->data['post'] = $post;
+        
+        return redirect('/admin/posts/'.$post->id);
     }
 
     public function destroy($post_id) {

@@ -2,7 +2,7 @@
 @section('title', 'Редактирование поста')
 @section('content')
 <div class="content-top">
-    <h3 class="title">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</h3>
+    <h3 class="title">Панель управления</h3>
     <div class="slider"><img src="/img/slider.png" alt="Image" class="image-main"></div>
   </div>
   <div class="content-middle">

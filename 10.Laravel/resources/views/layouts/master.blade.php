@@ -30,7 +30,6 @@
   <body>
     <div class="main-wrapper">
       <header class="main-header">
-       @if (Route::has('login'))
         <div class="logotype-container"><a href="#" class="logotype-link"><img src="/img/logo.png" alt="Логотип"></a></div>
         <nav class="main-navigation">
           <ul class="nav-list">
@@ -55,14 +54,13 @@
             </div>
           </div>
           <div class="authorization-block"><a href="{{ url('/logout') }}" class="authorization-block__link">Выйти</a></div>
+          @if (Auth::user()->is_admin)
+            <div class="authorization-block"><a href="/admin" class="authorization-block__link">Панель управления</a></div>  
+          @endif  
           @else
             <div class="authorization-block"><a href="{{ url('/register') }}" class="authorization-block__link">Регистрация</a><a href="{{ url('/login') }}" class="authorization-block__link">Войти</a></div>
-          @endif
-          @if (Auth::user())
-            <div class="authorization-block"><a href="/admin" class="authorization-block__link">Панель управления</a></div>  
-          @endif      
+          @endif    
         </div>
-      @endif
       </header>
      <div class="middle">
         <div class="sidebar">

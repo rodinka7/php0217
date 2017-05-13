@@ -2,7 +2,7 @@
 @section('title', 'Редактирование товаров')
 @section('content')
 <div class="content-top">
-    <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
+    <div class="content-top__text">Панель управления</div>
     <div class="image-container"><img src="/img/slider.png" alt="Image" class="image-main"></div>
   </div>
   <div class="content-middle">
@@ -22,10 +22,14 @@
     </div>
     <div class="content-main__container">
       <div class="product-container">
-	        <div class="product-container__image-wrap"><img src="/img/cover/{{ $good->image }}" class="image-wrap__image-product"></div>
+        <form class="edit-container__form" method="post" action="/admin/good/{{ $good->id }}" enctype="multipart/form-data">
+          {{ csrf_field() }}
+	        <div class="product-container__image-wrap">
+            <img src="/img/cover/{{ $good->image }}" class="image-wrap__image-product">
+            Изменить изображение:
+            <input type="file" name="image">
+          </div>
 	        <div class="product-container__content-text">
-      			<form class="edit-container__form" method="post" action="/admin/good/{{ $good->id }}">
-      			  {{ csrf_field() }}
 		          <div class="product-container__content-text__title"><input type="text" class="edit-container__form__input" name="title" value="{{ $good->name }}"></div>
 		          <div class="product-container__content-text__price">
 		            <div class="product-container__content-text__price__value">
@@ -36,9 +40,9 @@
 		          <div class="product-container__content-text__description">
 		            <textarea class="edit-container__form__textarea" name="description">{{ $good->description }}</textarea>
 		          </div>
-      			</form>
       			<a href="/admin/good/delete/{{ $good->id }}" class="btn btn-blue">Удалить</a>
 	        </div>
+        </form>
       </div>
     </div>
   </div>

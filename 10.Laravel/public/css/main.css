@@ -445,13 +445,15 @@ img {
         -ms-flex: 1 1 40%;
             flex: 1 1 40%;
     padding-right: 20px;
-    max-width: 300px; }
+    max-width: 300px;
+    display: inline-block; }
   .product-container__content-text {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 1 60%;
-        -ms-flex: 1 1 60%;
-            flex: 1 1 60%;
-    padding-left: 20px; }
+    -webkit-flex: 1 1 70%;
+        -ms-flex: 1 1 70%;
+            flex: 1 1 70%;
+    padding-left: 20px;
+    float: right; }
     .product-container__content-text__title {
       font-size: 26px;
       font-family: "PT_Sans", sans-serif;

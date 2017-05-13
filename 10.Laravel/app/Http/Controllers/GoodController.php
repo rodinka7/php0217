@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Http\Requests;
 use \App\Good;
+use \App\Category;
 
 class GoodController extends Controller
 {
@@ -53,6 +54,8 @@ class GoodController extends Controller
     }
 
     public function create(){
+        $categories = Category::all();
+        $this->data['categories'] = $categories;
         return view('admin.goods.create', $this->data);
     }
 
@@ -69,15 +72,18 @@ class GoodController extends Controller
         $good->name = $request->input('title');
         $good->description = $request->input('description');
         $good->price = $request->input('price');
-        $good->image = $request->file('image')->getClientOriginalName();
+        
+        if (!empty($request->file('image'))) {
+            $good->image = $request->file('image')->getClientOriginalName();
+            $file = $request->file('image');
+            $file->move(public_path() . '/img/cover',$request->file('image')->getClientOriginalName());
+        }
+        
         $good->save();
-
-        $file = $request->file('image');
-        $file->move(public_path() . '/img/cover',$request->file('image')->getClientOriginalName());
 
         $this->data['good'] = $good;
         
-        return view('admin.good', $this->data);
+        return redirect('/admin/good/'.$good->id);
         
     }
 
@@ -98,11 +104,17 @@ class GoodController extends Controller
         $good->name = $request->input('title');
         $good->description = $request->input('description');
         $good->price = $request->input('price');
+        if (!empty($request->file('image'))) {
+            $good->image = $request->file('image')->getClientOriginalName();
+            $file = $request->file('image');
+            $file->move(public_path() . '/img/cover',$request->file('image')->getClientOriginalName());
+        }
+        
         $good->save();
 
         $this->data['good'] = $good;
 
-        return view('admin.good', $this->data);
+        return redirect('/admin/good/'.$good->id);
     }
 
     public function destroy(Request $request, $good_id) {

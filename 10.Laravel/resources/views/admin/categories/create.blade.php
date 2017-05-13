@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Создание товара')
+@section('title', 'Создание категории')
 @section('content')
 <div class="content-top">
     <div class="content-top__text">Панель управления</div>
@@ -8,7 +8,7 @@
   <div class="content-middle">
     <div class="content-head__container">
       <div class="content-head__title-wrap">
-        <div class="content-head__title-wrap__title bcg-title">Новый товар</div>
+        <div class="content-head__title-wrap__title bcg-title">Новая категория</div>
       </div>
       <div class="content-head__search-block">
         <div class="search-container">
@@ -22,27 +22,16 @@
     </div>
     <div class="content-main__container">
       <div class="product-container">
-        <form class="create-container__form" method="post" action="/admin/create/good" enctype="multipart/form-data">
+        <form class="create-container__form" method="post" action="/admin/create/category" enctype="multipart/form-data">
           {{ csrf_field() }}
-	        <div class="product-container__create-wrap">Загрузите изображение: <input type="file" name="image"></div>
-          <div class="product-container__create-wrap">Название категории: 
-            <select name="category_id">
-              @foreach($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
-              @endforeach
-            </select>
-          </div>
           <div class="product-container__content-text__title"> 
-            <input type="text" class="edit-container__form__input" name="title" placeholder="Введите название товара">
+            <input type="text" class="edit-container__form__input" name="title" placeholder="Введите название категории">
           </div>
           <div class="product-container__content-text__price">
-            <div class="product-container__content-text__price__value">
-              Цена: <input type="text" class="edit-container__form__input" name="price" placeholder="Стоимость">
-              руб
-            </div><button type="submit" class="btn btn-blue">Сохранить</button>
+           <button type="submit" class="btn btn-blue">Сохранить</button>
           </div>
           <div class="product-container__create__description">
-            <textarea class="edit-container__form__textarea" name="description">Описание товара</textarea>
+            <textarea class="edit-container__form__textarea" name="description">Описание категории</textarea>
           </div>
         </form>
       </div>

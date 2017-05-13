@@ -60,18 +60,34 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+
+    protected function create(Request $request){
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+
+        if(isset($request->input('is_admin'))){
+            $user->is_admin = true;
+        }
+
+        $user->save();
+        dd($user);
+
+    }
+    /*protected function create(array $data)
     {
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt($data['password'])
         ]);
 
-        if (!empty($data['is_admin'])) {
+        if (isset($data['is_admin'])) {
             $user->is_admin = true;
         }
 
-        return $user;
-    }
+        dd($user);
+        //return $user;
+    }*/
 }
