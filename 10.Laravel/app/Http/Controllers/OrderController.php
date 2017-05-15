@@ -11,7 +11,7 @@ use \App\Order;
 class OrderController extends Controller
 {
     public function index(){
-    	$orders = Order::all();
+    	$orders = Order::where("user_id", "=", Auth::user()->id)->get();
 		$count = 0;
 		$price = 0;
 		$newOrders = [];

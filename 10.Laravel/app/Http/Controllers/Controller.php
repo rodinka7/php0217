@@ -37,15 +37,11 @@ class Controller extends BaseController
         }
 
         if (Auth::check()) {
-            $orders = Order::where('user_id', Auth::user()->id)->get();
+            $orders = Order::where("user_id", "=", Auth::user()->id)->get();
             foreach ($orders as $order){
-                $count++;
+                ++$count;
             }
-        }
-
-        foreach ($orders as $order) {
-            $count++;
-        }
+        }     
 
         $this->data['random_goods'] = $random_goods;
     	$this->data['posts'] = $posts;

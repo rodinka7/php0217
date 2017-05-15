@@ -27,9 +27,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/orders/delete/{id}', 'OrderController@destroy');
 });
 
-Route::get('/admin', 'GoodController@admin');
-
 Route::group(['prefix' => 'admin', 'middleware' => 'RoleAdmin'], function(){
+	Route::get('/', 'GoodController@admin');
+
 	Route::get('/good/{id}', 'GoodController@storeGood');
 	Route::post('/good/{id}', 'GoodController@update');
 	Route::get('/good/delete/{id}', 'GoodController@destroy');
