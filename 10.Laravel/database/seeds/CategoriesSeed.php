@@ -16,7 +16,7 @@ class CategoriesSeed extends Seeder
         	$faker = \Faker\Factory::create();
 
 		    $category->name = $faker->name;
-		    $category->description = $faker->realText($maxNbChars = 150, $indexSize = 2);
+            $category->description = $faker->text();
 		    $category->save();
         }
     }

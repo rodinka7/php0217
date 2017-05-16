@@ -1,0 +1,90 @@
+.main {
+   min-height: 560px;
+
+}
+.main-foto {
+   width: rem(410px);
+   height: rem(500px);
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+}
+.main-foto__inner {
+   padding: 29px 0px;
+   box-shadow: 0 4px 4.7px 0.3px rgba(25, 55, 77, 0.41);
+   border-radius: 8px;
+   background: #eee;
+   margin-bottom: rem(20px);
+}
+.main-foto__wrapper {
+   margin: 0 auto;
+   width: 347px;
+   height: 314px;
+   background-color: #191919;
+   border-radius: 8px;
+   margin-bottom: rem(30px);
+}
+.main-foto__name {
+   padding: 0 29px;
+   margin-bottom: rem(18px);
+   color: #212121;
+   font-family: ALSSchlangesans;
+   font-size: rem(20px);
+   font-weight: 700;
+}
+.main-foto__uni {
+   padding: 0 29px;
+   color: #727272;
+   font-family: HelveticaNeueCyr;
+   font-size: rem(16px);
+}
+
+.btn {
+  display: inline-block;
+   position: relative;
+  text-decoration: none;
+   //width: rem(190px);
+   //height: rem(48px);
+   background-color: #f0f0f0;
+   border-radius: 3px;
+   box-shadow: 0 4px 4.7px 0.3px rgba(25, 55, 77, 0.41);
+   margin-left: rem(25px);
+   font-family: HelveticaNeueCyr;
+   color: #212121;
+   font-size: rem(20px);
+   font-weight: 400;
+   padding: 16px 20px 16px 65px;
+   &:first-child {
+      margin-left: 0;
+   }
+}
+.btn_true {
+   &:before {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 31px;
+      height: 30px;
+      background: url('../img/heart.png') center center no-repeat;
+      top: 13px;
+      left: 17px;
+   }
+}
+.btn_false {
+   &:before {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 28px;
+      height: 27px;
+      background: url('../img/none.png') center center no-repeat;
+      top: 13px;
+      left: 17px;
+   }
+}
+.btn:hover {
+  box-shadow: none;
+}

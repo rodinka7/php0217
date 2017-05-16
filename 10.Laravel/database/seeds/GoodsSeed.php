@@ -18,8 +18,8 @@ class GoodsSeed extends Seeder
 
 		    $good->category_id = rand(1,5);
 		    $good->name = $faker->name;
-		    $good->description = $faker->realText($maxNbChars = 150, $indexSize = 2);
-		    $good->image = $faker->image('public/img/cover', 640, 480, 'cats', false);
+		    $good->description = $faker->text();
+            $good->image = $faker->image('public/img/cover', 640, 480, 'cats', false);
 		    $good->price = rand(150,1500);
 		    $good->save();
         }

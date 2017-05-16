@@ -27,12 +27,12 @@ class Controller extends BaseController
         $count = 0;
 
         while (empty($random_good)) {
-            $random_good = Good::find(rand(11,20));    
+            $random_good = Good::find(rand(1,10));    
         }
 
         for ($i = 0; $i < 3; $i++) {
             while (empty($random_goods[$i])) {
-                $random_goods[$i] = Good::find(rand(11,20));
+                $random_goods[$i] = Good::find(rand(1,10));
             }
         }
 

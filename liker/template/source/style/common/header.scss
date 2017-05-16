@@ -1,0 +1,276 @@
+.header {
+  min-height: rem(296px);
+  height: 50%;
+
+  background: url('../img/back.png') top left repeat-x,
+                    linear-gradient(to top, transparent 0%, #1976d2 100%);
+}
+
+.header > .container {
+  position: relative;
+  width: 95%;
+}
+
+//-------------------------- логотип ------------------- //
+.logo {
+  width: rem(185px);
+  height: rem(45px);
+  position: absolute;
+  top: rem(10px);
+  left: rem(10px);
+
+}
+
+.logo__img {
+  width: 100%;
+  heigth: auto;
+}
+
+// ------------------------ сайдбар -------------------- //
+.sidebar {
+  width: rem(215px);
+  position: absolute;
+  top: rem(25px);
+  right: rem(5px);
+  color: #fff;
+  text-align: right;
+}
+.sidebar--open {
+  color: #000;
+}
+
+.sidebar__title {
+  font-family: 'HelveticaNeueCyr';
+  font-size: rem(20px);
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  position: relative;
+  z-index: 2;
+}
+// кнопка меню
+.sidebar__btn {
+  display: inline-block;
+  vertical-align: top;
+  transition: 0.1s all linear;
+  position: relative;
+  background: 0;
+  width: rem(33px);
+  height: rem(23px);
+  outline: 0;
+  padding: 0;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  @include phone {
+    width: 1.75rem;
+    height: 1.5rem;
+  }
+}
+.sidebar__btn-bar {
+  cursor: pointer;
+  &, &::before, &::after {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: 50%;
+    left: 0;
+    margin: auto;
+    background: rgba(#fff, 0.5);
+    transition: all linear 0.2s;
+    border-radius: 2.5px;
+    content: '';
+    @include phone {
+      height: 3px;
+      border-radius: 1.5px;
+    }
+  }
+
+  &::before {
+    top: rem(-7px);
+    @include phone {
+      top: -0.5rem;
+    }
+  }
+  &::after {
+    top: rem(7px);
+    @include phone {
+      top: 0.5rem;
+    }
+  }
+
+  &::before,
+  &::after {
+    transform: rotate(0deg);
+  }
+
+
+  .sidebar__btn:hover &,
+  .sidebar__btn:hover &::before,
+  .sidebar__btn:hover &::after {
+    background: #fff;
+  }
+  .sidebar__btn--active:hover &{
+    background: 0;
+  }
+  .sidebar__btn--active & {
+    background: 0;
+
+    &::before {
+      transform: rotate(45deg);
+      background: rgba(#000, 0.5);
+    }
+    &::after {
+      transform: rotate(-45deg);
+      background: rgba(#000, 0.5);
+    }
+
+    &::before,
+    &::after {
+      top: 0;
+    }
+  }
+  .sidebar__btn--active:hover &::before,
+  .sidebar__btn--active:hover &::after {
+    background: #000;
+  }
+}
+
+.sidebar--open {
+  .sidebar__title {
+    color: #000;
+  }
+
+}
+// ----------------------  боковой блок -------------------- //
+
+.sidebar__inner {
+  position: absolute;
+  top: -25px;
+  right: -85px;
+  z-index: 1;
+  height: 105vh;
+  width: 615px;
+  transform: translateX(613px);
+  transition: transform 0.3s ease-in;
+  background-color: #fff;
+  box-shadow: -6px 0 18.1px 2.9px rgba(25, 55, 77, 0.41);
+  padding-top: 65px;
+
+  @include phone {
+    width: 440px;
+    transform: translateX(455px);
+  }
+}
+
+.sidebar__inner--open {
+  transform: translateX(0px);
+  transition: transform 0.3s ease-in;
+}
+
+//------------------------addblock -----------------------//
+.addblock {
+  padding: 80px 30px;
+}
+.addblock__top {
+  margin-bottom: 20px;
+}
+
+.addblock__title {
+  color: #212121;
+  font-family: HelveticaNeueCyr;
+  font-size: rem(30px);
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.addblock__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 71%;
+  margin-bottom: 30px;
+  max-height: 250px;
+  overflow: hidden;
+}
+.line {
+  height: 1px;
+  background: #dadada;
+  width: 70%;
+}
+.addblock__item {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  width: 80px;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  padding: 3px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.addblock__img-wrapper {
+  width: 79px;
+  height: 79px;
+  background-color: #212121;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+
+}
+
+.remove {
+  display: none;
+  top: 4px;
+  right: -6px;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #f0efef;
+  background-image: url('../img/del.png');
+  background-repeat: no-repeat;
+  background-position: center, center;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.addblock__item:hover > .addblock__img-wrapper{
+  box-shadow: 0 0 1px 3px #c03636;
+}
+.addblock__item:hover > .addblock__img-wrapper + .remove{
+  display: block;
+}
+
+.addblock__img {
+  width: auto;
+  height: auto;
+}
+
+.addblock__user {
+  color: #212121;
+  font-family: ALSSchlangesans;
+  font-size: rem(12px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.paginator__list {
+  width: 50%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+.paginator__items {
+  display: inline-block;
+}
+.paginator__link {
+  text-decoration: none;
+  color: #212121;
+}
